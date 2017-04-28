@@ -21,6 +21,7 @@ tablecaptionabove
 \usepackage{graphicx,color}	% zum importieren von grafiken
 \usepackage{epstopdf}		% converting eps to PDF
 \usepackage{float}			% für den text fluss um figures und tables
+\usepackage{tabularx}
 
 % modul wird nicht gefunden
 %\usepackage{siunitx}		%si einheituen symbole
@@ -44,18 +45,13 @@ tablecaptionabove
 \listoftables
 
 \section{Versionsführung}
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|}
-	\hline
-	\textbf{ Datum } &
-	\textbf{ Bearbeiter } &
-	\textbf{ Bemerkung } \\
-	\hline 
-		500	& 2,90 & 28,40 \\
-	\hline
-\end{tabular}
-\end{table}
+\begin{tabularx}{\textwidth}{ |X|X|X| }
+  \hline
+	\textbf{ Datum } & \textbf{ Bearbeiter } & \textbf{ Bemerkung } \\
+  \hline 
+  item 1  & item 2  & item 3 \\
+  \hline
+\end{tabularx}
 
 \section{Projektziel}
 Das Projekt „Wir haben noch keinen Namen“ entstand aus der Idee mithilfe von Messstationen umweltbezogene Daten im Berliner Stadtgebiet zu sammeln, aufzubereiten und schließlich als „Open Data“ zu veröffentlichen und sie somit auch Dritten für weitergehende Analysen und Visualisierungen zugänglich zu machen.
