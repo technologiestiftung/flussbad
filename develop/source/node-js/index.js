@@ -11,15 +11,15 @@ const fileneme = d.getFullYear() + '-' + mon + '-' + day + '__' + hour + '.' + m
 
 
 var region = 'eu';
-var appId = '1312-test-app';
-var accessKey = 'ttn-account-v2.VGfb9393iQkfRFzf5WTC5yQbpbLcT2TBd1YO2JfHCr4';
-    
+var appId = 'ab3_ultrasonic';
+var accessKey = 'ttn-account-v2.6soKNBjIWr1k792vM4nAtlPR8WtMi3NB2qWjJhEb1PA';
+
 var client = new ttn.Client(region, appId, accessKey);
 
 client.on('connect', function(connack) {
 	console.log('[DEBUG]', 'Connect:', connack);
 });
-    
+
 client.on('error', function(err) {
 	console.error('[ERROR]', err.message);
 });
@@ -63,5 +63,3 @@ client.on('message', function(deviceId, data) {
 	console.log("----------------------------------------------");
 
 });
-
-

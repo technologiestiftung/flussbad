@@ -1,3 +1,6 @@
+TODO Meeting on 13.06.2017
+-----
+
 Für Vorstellung durch uns:
 -Präsentation
 -(live) Vorführung von existierenden Code (Arduino sendet, wird in TTN gespeichert, Server holt Daten)
