@@ -23,11 +23,11 @@
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="0.0"
+     inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="240.26401"
-     inkscape:cy="801.86097"
+     inkscape:cx="-43.08378"
+     inkscape:cy="599.83046"
      inkscape:document-units="px"
      inkscape:current-layer="svg2"
      showgrid="false"
@@ -478,7 +478,7 @@
        sodipodi:role="line"
        x="10.176165"
        y="241.87852"
-       id="tspan4576"></tspan><tspan
+       id="tspan4576" /><tspan
        sodipodi:role="line"
        x="10.176165"
        y="253.01552"
@@ -497,7 +497,7 @@
          height="95.964493"
          x="13.131983"
          y="205.85437" /></flowRegion><flowPara
-       id="flowPara4592"></flowPara></flowRoot>  <text
+       id="flowPara4592" /></flowRoot>  <text
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      x="45"
