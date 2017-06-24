@@ -1,3 +1,12 @@
+===Schreibarbeit===
+Philipp: 1.2.2:Meilenstein, 3, 6
+Mark: 4,5 (außer usecase, ER)
+Heiko: 1 (außer 1.4),2,7
+Kayo: 1.4, 4:usecase, 4:ER, Anhänge
+3.2 für alle!! wer idee hat, reinschreiben!
+
+
+
 ===Recherchen===
 
 -TTN-Schnittstelle (welche besonders gut für DB-Integration geeignet?):
@@ -14,3 +23,7 @@
 -Wie Kollaboration zwischen Usern im TTN?
     Recherche: Heiko & Phillip
     Test: Mark
+
+
+
+
