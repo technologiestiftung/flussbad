@@ -33,7 +33,12 @@ ngerman,
    footskip=50pt,
    marginparwidth=70pt
 ]{geometry}
+
+
 \setlength{\parindent}{0.95cm}
+
+% set a sans serif typo
+%\renewcommand{\familydefault}{\sfdefault}
 
 %comments talk
 \newcommand{\commentKayo}[1]{\todo[size=\small,color=green!40,author=Kayo]{#1}}
@@ -79,10 +84,31 @@ ngerman,
 	Das Werk einschließlich aller seiner Teile ist urheberrechtlich geschützt. Jede Verwertung außerhalb der engen Grenzen des Urheberrechtsgesetzes ist ohne Zustimmung des Verfassers unzulässig und strafbar.
 }
 
+%set global table cell style
+\setlength{\tabcolsep}{8pt} % Default value: 6pt
+\renewcommand{\arraystretch}{1.3} % Default value: 1
+
 %%%%%%%%%%%%%%%%%%%%%%%
 %% Document
 %%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+
+% set title page
+\begin{titlepage}
+{ %
+	\begingroup
+	\hbox{ % Horizontal box
+		\parbox[b]{1.1\textwidth}{ % Paragraph box which restricts text to less than the width of the page
+			{\noindent\Huge\bfseries Pflichtenheft \\[0.2\baselineskip] } % Title
+			{\large Projekt-ID 4 }\\[3\baselineskip] % Tagline or further description
+			{\noindent\Huge\bfseries Klare Sicht im Kupfergraben \\[.5\baselineskip] }
+			{\Large {Bestimmung der Wasserqualität mit Hilfe von Messtationen auf LoRaWAN-Basis}}
+		}%
+	}%
+	\endgroup%
+}%
+\end{titlepage}
+
 
 \tableofcontents
 \listoffigures
@@ -99,26 +125,28 @@ ngerman,
 
 \subsubsection{Änderungshistorie}
 
+\begin{table}[H] %set table here [H]
 \begin{tabularx}{\textwidth}{ |X|X|X|X| }
 	\hline  %table header
-	\rowcolor[gray]{.8}
-	\rule{0pt}{18pt}
-	\textbf{ Version } & \textbf{ Datum } & \textbf{ Autor } & \textbf{ Änderungsgrund } \\
+	\rowcolor[gray]{.8}%
+	\rule{0pt}{18pt}%
+	\textbf{Version} & \textbf{Datum} & \textbf{Autor} & \textbf{Änderungsgrund} \\
 	\hline  %table content
 	V 0.1 & xx.xx.xxxx & HR, MO, PA, KA & Initiale Version \\
 	\hline
 \end{tabularx}
+\end{table}
 
 \subsubsection{Abkürzungen}
 
-\begin{table}[h] %set table here [h]
+\begin{table}[H] %set table here [H]
 	\centering
 	\begin{tabular}{ |l|l| } %set col alignment left [l] with vertical border
 		\hline  %table header
 		% set color for the header
-		\rowcolor[gray]{.8}
-		\rule{0pt}{18pt}
-		\textbf{ Abkürzung } & \textbf{ Erläuterung } \\
+		\rowcolor[gray]{.8}%
+		\rule{0pt}{18pt}%
+		\textbf{Abkürzung} & \textbf{Erläuterung} \\
 		\hline  %table content
 		LoRaWAN & Long Range Wide Area Network \\
 		\hline
@@ -132,11 +160,11 @@ ngerman,
 \subsubsection{Glossar}
 
 \begin{table}[H]
-	\begin{tabularx}{\textwidth}{ |m{3.0cm}|X| }
+	\begin{tabularx}{\textwidth}{ |l|X| }
 		\hline  %table header
-		\rowcolor[gray]{.8}
-		\rule{0pt}{18pt}
-		\textbf{ Abkürzung } & \textbf{ Erläuterung } \\
+		\rowcolor[gray]{.8}%
+		\rule{0pt}{18pt}%
+		\textbf{Abkürzung} & \textbf{Erläuterung} \\
 		\hline  %table content
 		LoRaWAN & Ein energiesparendes Funkprotokoll, in Europa im 868MHz-Band. Es ermöglicht Endgeräten das Versenden von Daten über Funk an das Internet, indem die Daten durch Basisstationen aufgefangen und an Netzwerkserver weitergeleitet werden, auf welche über Schnittstellen aus dem Internet heraus zugegriffen werden kann. Auf umgekehrten Wege können auch Daten vom Internet heraus an die Endgeräte gesendet werden. \\
 		\hline
@@ -190,13 +218,13 @@ Ziel des Projektes ist es Messstationen mit Sensoren auszustatten, erfolgreich i
 
 Das Projektteam besteht aus den folgenden Studenten der Technischen Informatik an der Beuth Hochschule für Technik Berlin.
 
-\begin{table}[h]
+\begin{table}[H]
 	\centering
 	\begin{tabular}{ |l|l| }
 		\hline  %table header
-		\rowcolor[gray]{.8}
-		\rule{0pt}{18pt}
-		\textbf{ Matrikelnummer } & \textbf{ Name, Vorname } \\
+		\rowcolor[gray]{.8}%
+		\rule{0pt}{18pt}%
+		\textbf{Matrikelnummer} & \textbf{Name, Vorname} \\
 		\hline  %table content
 		826054 & Abe, Kayoko \\
 		\hline
