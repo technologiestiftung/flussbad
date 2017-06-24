@@ -51,6 +51,9 @@ ngerman,
 	\end{itshape}%
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%
+%% set doc header
+%%%%%%%%%%%%%%%%%%%%%%%
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
 \fancyhead[CE,CO,LE,LO,RE,RO]{} %% clear out all headers
@@ -66,12 +69,19 @@ ngerman,
 		\hline
 	\end{tabularx}%
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% set doc footer
+%%%%%%%%%%%%%%%%%%%%%%%
 \fancyfoot[CE,CO,LE,LO,RE,RO]{} %% clear out all footers
 \fancyfoot[L]{%
 	\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
 	Das Werk einschließlich aller seiner Teile ist urheberrechtlich geschützt. Jede Verwertung außerhalb der engen Grenzen des Urheberrechtsgesetzes ist ohne Zustimmung des Verfassers unzulässig und strafbar.
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Document
+%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 \tableofcontents
@@ -82,6 +92,7 @@ ngerman,
 
 %% add this if you want the fancy style also on the first page of a chapter:
 %\thispagestyle{fancy}
+
 \section{Einleitung}
 
 \subsection{Dokumentverwaltung}
@@ -89,25 +100,26 @@ ngerman,
 \subsubsection{Änderungshistorie}
 
 \begin{tabularx}{\textwidth}{ |X|X|X|X| }
-	\hline
+	\hline  %table header
 	\rowcolor[gray]{.8}
 	\rule{0pt}{18pt}
 	\textbf{ Version } & \textbf{ Datum } & \textbf{ Autor } & \textbf{ Änderungsgrund } \\
-	\hline 
+	\hline  %table content
 	V 0.1 & xx.xx.xxxx & HR, MO, PA, KA & Initiale Version \\
 	\hline
 \end{tabularx}
 
 \subsubsection{Abkürzungen}
-\begin{table}[h]
+
+\begin{table}[h] %set table here [h]
 	\centering
-	\begin{tabular}{ |l|l| }
+	\begin{tabular}{ |l|l| } %set col alignment left [l] with vertical border
 		\hline  %table header
+		% set color for the header
 		\rowcolor[gray]{.8}
 		\rule{0pt}{18pt}
 		\textbf{ Abkürzung } & \textbf{ Erläuterung } \\
-		\hline
-		%table content
+		\hline  %table content
 		LoRaWAN & Long Range Wide Area Network \\
 		\hline
 		TSB & Technologiestiftung Berlin \\
@@ -118,13 +130,14 @@ ngerman,
 \end{table}
 
 \subsubsection{Glossar}
+
 \begin{table}[H]
 	\begin{tabularx}{\textwidth}{ |m{3.0cm}|X| }
-		\hline
+		\hline  %table header
 		\rowcolor[gray]{.8}
 		\rule{0pt}{18pt}
 		\textbf{ Abkürzung } & \textbf{ Erläuterung } \\
-		\hline
+		\hline  %table content
 		LoRaWAN & Ein energiesparendes Funkprotokoll, in Europa im 868MHz-Band. Es ermöglicht Endgeräten das Versenden von Daten über Funk an das Internet, indem die Daten durch Basisstationen aufgefangen und an Netzwerkserver weitergeleitet werden, auf welche über Schnittstellen aus dem Internet heraus zugegriffen werden kann. Auf umgekehrten Wege können auch Daten vom Internet heraus an die Endgeräte gesendet werden. \\
 		\hline
 		TTN & Ein auf LoRaWAN basierendes freies Netzwerk mit Community-betriebenen Basisstationen und Server. Es ermöglicht das einfache Versenden von Daten mittels LoRaWAN an Computer/Server im Internet. Hierzu leiten die Basisstationen die empfangenen Daten an die TTN-Server weiter, auf welche aus dem Internet aus über Schnittstellen zugegriffen werden kann. \\
@@ -184,8 +197,7 @@ Das Projektteam besteht aus den folgenden Studenten der Technischen Informatik a
 		\rowcolor[gray]{.8}
 		\rule{0pt}{18pt}
 		\textbf{ Matrikelnummer } & \textbf{ Name, Vorname } \\
-		\hline
-		%table content
+		\hline  %table content
 		826054 & Abe, Kayoko \\
 		\hline
 		798168 & Albrecht, Philipp \\
@@ -331,10 +343,73 @@ Primäre Zielgruppen sind die Technoligiestiftung Berlin (TSB) und der Verein Fl
 
 \descriptionWhat{Dokumentenstruktur, Web-Seitenstruktur, Seitenstruktur Bauteile, Konstruktionspläne}
 
+\newpage
+
+\section{Entwicklungs- und Produktionsrahmenbedingungen}
+
+Die Messstationen bestehen im Kern aus einem Arduino Uno sowie dem Dragino-Shield. Daran angeschlossen werden die Sensoren zur Messung der Wasserqualität. Auf jeden Fall müssen ein pH-Wert, ein Wassertrübheits-, sowie ein Wassertemperatursensor vorhanden sein. Optional zur Bestimmung der Wasserqualität sind ein Leitfähigkeitssensor und ein Sensor zur Bestimmung der Menge des im Wasser gelösten Sauerstoffs. Auch wird ein geeignetes Gehäuse für die Station benötigt. 
+Aufgrund der mangelhaften Funknetzstärke an dem Messorten muss noch mind. Ein TTN Gateway installiert werden. Der geplante Standort ist der Versuchsfilter des Vereins Flussbad Berlin. Die benötigte Hardware wird duch die Technologiestiftung Berlin gestellt. 
+Softwareseitig wird eine Komponente zum Abgreifen der Messdaten aus dem TTN, ein Datenbanksystem für die Speicherung (Software auf dem Datenbankserver), eine Web-Applikation zum Anzeigen, sowie eine Schnittstelle (API) zum erweiterten Zugriff auf die Messdaten. Die Messinstrumente werden durch zu entwickelnde Software auf dem Arduino ausgewertet, diese Messdaten werden anschließend an TTN versendet. 
+Technisch begrenzt werden die Messstationen vom Energieverbrauch sowie der Datenrate bei TTN. Für das benutzte (freie) 868MHz Funkband besteht die Sendezeitbegrenzung von max. 1\% einer Stunde von Seiten der Bundesnetzagentur. 
+Finanzielle Grenzen sind dem Projekt von Seiten des Budgets der TSB gesetzt.
+
+\section{Systemschnittstellen}
+
+\descriptionWhat{Soll-Darstellung}
+
+\subsection{HW/SW-Konfiguration}
+
+\descriptionWhat{Welche HW/SW-Konfigurationen sind notwendig}
+
+\newpage
+
+\section{Prozessschnittstellen}
+
+\descriptionWhat{Soll-Darstellung}
+
+\subsection{Workflow-Integration}
+
+\descriptionWhat{Beschreibung der Integration in existierende, angrenzende Workflows / Prozesse
+Beschreibung der neuen Workflow-Landschaft}
+
+\newpage
+
+\section{Risiken}
 
 
+\newpage
 
+\section{Einverständnis-Erklärung}
 
+Die Parteien bestätigen, dass der Inhalt dieses Pflichtenheftes die jeweiligen vertraglichen Verpflichtungen darstellt. Es besteht gemeinsames Einverständnis, dass das Pflichtenheft im Laufe des Projektes einvernehmlich schriftlich geändert werden kann.
 
+\begin{table}[H]
+	\begin{tabularx}{\textwidth}{ |m{2cm}Xm{1.2cm}X| }
+		\hline
+		\multicolumn{4}{|c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		Unterschrift: & \makebox[0.3\columnwidth]{\dotfill} & Datum: & \makebox[0.3\columnwidth]{\dotfill} \\
+		\multicolumn{4}{|c|}{} \\
+		Name: & \makebox[0.3\columnwidth]{\dotfill} & \multicolumn{2}{c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		Unterschrift: & \makebox[0.3\columnwidth]{\dotfill} & Datum: & \makebox[0.3\columnwidth]{\dotfill} \\
+		\multicolumn{4}{|c|}{} \\
+		Name: & \makebox[0.3\columnwidth]{\dotfill} & \multicolumn{2}{c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		Unterschrift: & \makebox[0.3\columnwidth]{\dotfill} & Datum: & \makebox[0.3\columnwidth]{\dotfill} \\
+		\multicolumn{4}{|c|}{} \\
+		Name: & \makebox[0.3\columnwidth]{\dotfill} & \multicolumn{2}{c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		Unterschrift: & \makebox[0.3\columnwidth]{\dotfill} & Datum: & \makebox[0.3\columnwidth]{\dotfill} \\
+		\multicolumn{4}{|c|}{} \\
+		Name: & \makebox[0.3\columnwidth]{\dotfill} & \multicolumn{2}{c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		\hline
+	\end{tabularx}
+\end{table}
 
 \end{document}
