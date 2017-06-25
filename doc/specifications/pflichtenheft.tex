@@ -1,0 +1,443 @@
+\documentclass[
+11pt,
+a4paper,
+ngerman,
+]{article}
+
+\usepackage{babel}	%übersetzt die englischen überschriften ins deutche
+					% damit sind \tableofcontents und co gemeint
+
+\usepackage[utf8]{inputenc}
+\usepackage[demo]{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{array}
+\usepackage{lastpage}
+\usepackage{lipsum}
+\usepackage{currfile}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{colortbl}
+\usepackage{enumitem}
+\usepackage{ulem}
+
+\usepackage[textwidth=3.5cm,prependcaption]{todonotes}
+
+\usepackage{float}			% für den text fluss um figures und tables
+
+\usepackage[
+   hmargin=2cm,
+   right=4.3cm,  %remove if no more todos active
+   top=4cm,
+   bottom=4.5cm,
+   headheight=65pt,
+   footskip=50pt,
+   marginparwidth=70pt
+]{geometry}
+
+
+\setlength{\parindent}{0.95cm}
+
+% set a sans serif typo
+%\renewcommand{\familydefault}{\sfdefault}
+
+%comments talk
+\newcommand{\commentKayo}[1]{\todo[size=\small,color=green!40,author=Kayo]{#1}}
+\newcommand{\commentHeiko}[1]{\todo[size=\small,color=blue!30,author=Heiko]{#1}}
+\newcommand{\commentMark}[1]{\todo[size=\small,color=red!90!green!30,author=Mark]{#1}}
+\newcommand{\commentPhil}[1]{\todo[size=\small,color=red!35!blue!40,author=Phillip]{#1}}
+
+%
+\newcommand{\rem}[1]{\textcolor{red}{\sout{#1}}}
+\newcommand{\add}[1]{\textcolor{blue}{\uline{#1}}}
+
+\newcommand{\descriptionWhat}[1]{%
+	\begin{itshape}%
+	#1 \\%
+	\end{itshape}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% set doc header
+%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[CE,CO,LE,LO,RE,RO]{} %% clear out all headers
+\fancyhead[C]{%
+	\begin{tabularx}{\columnwidth}{|X|X|r|}
+		\hline
+		Unternehmen & \centering ID 4 & \centering Klare sicht im Kupfergraben
+		\tabularnewline
+		\hline
+		\multicolumn{2}{|c|}{} & 22.06.2017 \\
+		\hline
+		\multicolumn{2}{|l|}{ \currfilename } & \thepage\ of \pageref*{LastPage} \\
+		\hline
+	\end{tabularx}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% set doc footer
+%%%%%%%%%%%%%%%%%%%%%%%
+\fancyfoot[CE,CO,LE,LO,RE,RO]{} %% clear out all footers
+\fancyfoot[L]{%
+	\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+	Das Werk einschließlich aller seiner Teile ist urheberrechtlich geschützt. Jede Verwertung außerhalb der engen Grenzen des Urheberrechtsgesetzes ist ohne Zustimmung des Verfassers unzulässig und strafbar.
+}
+
+%set global table cell style
+\setlength{\tabcolsep}{8pt} % Default value: 6pt
+\renewcommand{\arraystretch}{1.3} % Default value: 1
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Document
+%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% set title page
+\begin{titlepage}
+{ %
+	\begingroup
+	\hbox{ % Horizontal box
+		\parbox[b]{1.1\textwidth}{ % Paragraph box which restricts text to less than the width of the page
+			{\noindent\Huge\bfseries Pflichtenheft \\[0.2\baselineskip] } % Title
+			{\large Projekt-ID 4 }\\[3\baselineskip] % Tagline or further description
+			{\noindent\Huge\bfseries Klare Sicht im Kupfergraben \\[.5\baselineskip] }
+			{\Large {Bestimmung der Wasserqualität mit Hilfe von Messtationen auf LoRaWAN-Basis}}
+		}%
+	}%
+	\endgroup%
+}%
+\end{titlepage}
+
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\newpage
+
+%% add this if you want the fancy style also on the first page of a chapter:
+%\thispagestyle{fancy}
+
+\section{Einleitung}
+
+\subsection{Dokumentverwaltung}
+
+\subsubsection{Änderungshistorie}
+
+\begin{table}[H] %set table here [H]
+\begin{tabularx}{\textwidth}{ |X|X|X|X| }
+	\hline  %table header
+	\rowcolor[gray]{.8}%
+	\rule{0pt}{18pt}%
+	\textbf{Version} & \textbf{Datum} & \textbf{Autor} & \textbf{Änderungsgrund} \\
+	\hline  %table content
+	V 0.1 & xx.xx.xxxx & HR, MO, PA, KA & Initiale Version \\
+	\hline
+\end{tabularx}
+\end{table}
+
+\subsubsection{Abkürzungen}
+
+\begin{table}[H] %set table here [H]
+	\centering
+	\begin{tabular}{ |l|l| } %set col alignment left [l] with vertical border
+		\hline  %table header
+		% set color for the header
+		\rowcolor[gray]{.8}%
+		\rule{0pt}{18pt}%
+		\textbf{Abkürzung} & \textbf{Erläuterung} \\
+		\hline  %table content
+		LoRaWAN & Long Range Wide Area Network \\
+		\hline
+		TSB & Technologiestiftung Berlin \\
+		\hline
+		TTN & The Things Network \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection{Glossar}
+
+\begin{table}[H]
+	\begin{tabularx}{\textwidth}{ |l|X| }
+		\hline  %table header
+		\rowcolor[gray]{.8}%
+		\rule{0pt}{18pt}%
+		\textbf{Abkürzung} & \textbf{Erläuterung} \\
+		\hline  %table content
+		LoRaWAN & Ein energiesparendes Funkprotokoll, in Europa im 868MHz-Band. Es ermöglicht Endgeräten das Versenden von Daten über Funk an das Internet, indem die Daten durch Basisstationen aufgefangen und an Netzwerkserver weitergeleitet werden, auf welche über Schnittstellen aus dem Internet heraus zugegriffen werden kann. Auf umgekehrten Wege können auch Daten vom Internet heraus an die Endgeräte gesendet werden. \\
+		\hline
+		TTN & Ein auf LoRaWAN basierendes freies Netzwerk mit Community-betriebenen Basisstationen und Server. Es ermöglicht das einfache Versenden von Daten mittels LoRaWAN an Computer/Server im Internet. Hierzu leiten die Basisstationen die empfangenen Daten an die TTN-Server weiter, auf welche aus dem Internet aus über Schnittstellen zugegriffen werden kann. \\
+		\hline
+		Arduino Uno & Ein Mikrocontroller-Board auf Basis des ATmega328P. Durch seine Energiesparsamkeit, der vielen I/O-Pins, dem ADC (Analog-Digital-Konverter), sowie der Einfachheit der Programmierung eignet er sich gut als Controller für Messstationen, kleineren Steuerungen u.ä. \\
+		\hline
+		Dragino-Shield & Der vollständige Name lautet Dragino LoRa Shield. Dieses Shield für einen Arduino ermöglicht das Funken im 868MHz-Band, welches in der LoRaWAN-Technologie benutzt wird. Es ermöglicht uns das Versenden von Daten über TTN. \\
+		\hline
+		Messstation & Unsere Messstationen bestehen aus Sensoren zur Bestimmung der Wasserqualität, einem Arduino Uno, einem Dragino-Shield sowie einem Gehäuse. Der Arduino Uno ließt regelmäßig die Werte der Sensoren und verschickt sie mit Hilfe des Dragino-Shields über TTN. \\
+		\hline
+		Datenbankserver & Ein Server, auf welchem Software läuft, die dafür zuständig ist regelmäßig die Messdaten aus dem TTN zu laden und in eine Datenbank einzulagern. Der Lesezugriff durch Dritte auf die Daten wird ermöglicht. \\
+		\hline
+		Schutzklasse IP65 & Definiert durch die DIN~EN~60529. Gehäuse entsprechen der Schutzart IP65 wenn sie Staubdicht sind und Schutz gegen Strahlwasser (Düse) aus beliebiger Richtung bieten. \\
+		\hline
+		Node &  \\
+		\hline
+		Gateway & Eine Empfangstation, welche die von Nodes gesendeten Nachrichten empfängt und über das Internet an die Server von TTN weiterleitet. \\
+		\hline  
+	\end{tabularx}
+\end{table}
+
+\subsubsection{Ablage des Dokuments}
+
+\subsection{Projekthintergrund}
+
+\subsubsection{Projektinitiierung und -zielsetzung}
+
+\begin{itshape}
+	Kurze Darstellung des Projektanlasses und Nennung des Projektziels. 
+	Nennung des Auftraggebers etc.
+\end{itshape}
+
+\paragraph{\uline{Anlass}}
+Das Projekt \glqq Klare Sicht im Kupfergraben\grqq{} entstand aus der Idee der Technologiestiftung Berlin (TSB) mit Hilfe von Messstationen umweltbezogene Daten im Berliner Stadtgebiet zu sammeln, aufzubereiten und schließlich als \glqq Open Data\grqq{} zu veröffentlichen und sie somit auch Dritten für weitergehende Analysen und Visualisierungen zugänglich zu machen.
+Die TSB vermittelt Wissen über digitale Chancen und Herausforderungen, entwickelt digitale Tools und gestaltet in gemeinsamen Projekten mit Stadtgesellschaft, Verwaltung und Unternehmen den digitalen Wandel in Berlin.
+
+\paragraph{\uline{Zielsetzung}}
+\commentKayo{Das Ziel muss \textbf{lösungsneutral} formuliert sein. Es darf keine Lösungswege vorwegnehmen: Es sollten weder Lösungen beschrieben noch bestimmte Lösung favorisiert werden.}%
+Ziel des Projektes ist es Messstationen mit Sensoren auszustatten, erfolgreich in Betrieb zu nehmen, Daten zu sammeln, und diese anschließend zentral auf einen Datenbankserver abzulegen, um sie für weitere Verarbeitung verfügbar zu machen..
+
+\subsubsection{Projekt-Meilensteine}
+
+\descriptionWhat{Darstellung der aktuellen Meilensteinplanung}
+
+\subsection{Projektrahmenbedingungen}
+
+\subsubsection{Organisation}
+
+\descriptionWhat{ Projektteam \\ Kommunikationszyklen \\ Projektlaufwerk }
+
+Das Projektteam besteht aus den folgenden Studenten der Technischen Informatik an der Beuth Hochschule für Technik Berlin.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ |l|l| }
+		\hline  %table header
+		\rowcolor[gray]{.8}%
+		\rule{0pt}{18pt}%
+		\textbf{Matrikelnummer} & \textbf{Name, Vorname} \\
+		\hline  %table content
+		826054 & Abe, Kayoko \\
+		\hline
+		798168 & Albrecht, Philipp \\
+		\hline
+		830645 & Otto, Mark \\
+		\hline
+		835333 & Radde, Heiko \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Die regelmäßige Kommunikation im Team findet via E-Mail, Messanger App und direkter Besprechung statt. Die Kommunikation mit dem Projektauftragsgeber TSB findet primär durch die Email und teilweise durch Treffen statt.
+Als Projektlaufwerk wird Git verwendet.
+
+\subsection{Referenzdokumente}
+
+\descriptionWhat{ Nennung von Dokumenten und Ort der Aufbewahrung }
+
+Es existieren bereits diverse Referenzprojekte, die verdeutlichen wie und wozu die über LoRaWAN gesammelten Daten verwendet werden können:
+
+\begin{itemize}[noitemsep]
+	\item Skopje Pulse (\url{http://skopjepulse.mk})
+	\item Deutsche Bahn (\url{https://www.technologiestiftung-berlin.de/fileadmin/daten/media/publikationen/vortraege/materialien/1705050_Willner_Vortrag.pdf})
+\end{itemize}
+
+Als unser Messort stellt der Verein Flussbad Berlin seine Filteranlage im Spree zur Verfügung:
+
+\begin{itemize}[noitemsep]
+	\item Das Projekt Flussbad (\url{http://www.flussbad-berlin.de/projekt})
+\end{itemize}
+
+Die verfügbaren Gateways werden durch TTN Mapper gefunden:
+
+\begin{itemize}[noitemsep]
+	\item TTN Mapper (\url{https://ttnmapper.org})
+\end{itemize}
+
+\newpage
+
+\section{Beschreibung der Ausgangssituation}
+
+\subsection{Kurzbeschreibung der Ausgangssituation}
+
+\descriptionWhat{Ausgangssituation, IST-Situation (aus \glqq Lösersicht\grqq{}; unter Anreicherung mit \glqq Zielkontextwissen\grqq{})}
+
+Ein Node kann durch einen Gateway über The Things Network kommunizieren, welches auf die Technologie LoRaWAN aufbaut. LoRaWAN ist ein funkbasiertes Netzwerkdesign, welches es ermöglicht energiesparend Daten zu versenden. TTN stellt eine Schnittstelle zum Internet bereit und vereinfacht dadurch die Weiterleitung der Messdaten an externe Dienste/Server. Die über LoRaWAN an TTN gesendeten Daten werden bis zum Abruf dieser, jedoch maximal 7 Tage, zwischengespeichert, wenn ihre „Storage Integration“ verwendet wird.
+Gateways sind freiwillig au
+
+\subsection{Auftraggeber}
+
+\descriptionWhat{Einordnendes Profil des Auftraggebers aus \glqq Lösersicht\grqq{}}
+
+Bereits seit 2014 beteiligt die TSB sich aktiv an der Förderung der Strategie bezüglich der offenen Daten in Berlin mit verschiedenen Unternehmen, Behörden und Instituten.
+Im Rahmen von einem solcher Projekte organisierte sie bereits am 05.05.2017 das erste \glqq LoRaWAN-Treffen\grqq{}  in Zusammenarbeit mit The Things Network Berlin, wobei eine Plattform der Begegnung für viele Interessanten geschafft wurde, in der sie eigene Gedanken miteinander austauschen konnten.
+Des Weiteren hält sie am 23.05.2017 das zweite Treffen, in dem sie weitere Möglichkeiten der Anwendungsfälle vorstellen wird, damit die Interessanten sich vernünftig mit der LoRaWAN-Technik beschäftigen können.
+Trotz der Behandlung der sensiblen Umweltdaten in der Stadt sollte das Projekt von der TSB durch ihre eigene Kontakt zu den Behörden und anderen Einrichtungen stark unterstützt werden.
+Zu den direkt Beteiligten an diesem Projekt gehören Dr. Christian Hammel, Dr. Benjamin Seibel und Sebastian Rauer.
+
+\subsection{Zielbeschreibung}
+
+\descriptionWhat{Fachliche Zielinterpretation aus Sicht der Umsetzung (ohne technische Umsetzungsbeschreibung), angenommener sachlicher Effekt usw.}
+
+Es sollen robuste und wartungsarme Messstationen zu Umweltdaten entstehen. Diese Messstationen werden am Kupfergraben und der Spree betrieben, um die Wasserqualität im Kontext des Testfilters des Vereins Flussbad Berlin zu messen. \commentKayo{In Anlass  und Glossar umschreiben}Der Verein tritt dafür ein ein Flussbad am Kupfergraben, auf Höhe des Lustgartens, zu errichten. Zur dafür nötigen Verbesserung der Wasserqualität im Kupfergraben ist der Betrieb einer Filteranlage notwendig, ein Prototyp dieser wird zeitnah \commentKayo{Noch genauer. Juli?} in Betrieb genommen werden. Die Veränderung der Wasserqualität durch diesen Prototypen soll mit den Sensoren unserer Messstationen gemessen werden. Hierfür ist es zusätzlich notwendig, dass ein Gehäuse entworfen wird, welches den Umwelteinflüssen am Kupfergraben standhält.\\
+Die Messstation wird die Messdaten über ein Gateway an TTN versenden. Ein Datenbankserver muss über eine der Schnittstellen von TTN die Daten \commentKayo{Genauere Beschreibung benötigt.}regelmäßig laden und in der eigenen Datenbank speichern. Die Serversoftware und die Datenbank müssen so umgesetzt werden, dass es für Dritte einfach möglich ist die Messdaten abzurufen.
+
+\newpage
+
+\section{Produktanforderungen}
+
+Allgemein müssen neben allen verwendeten Komponenten auch das von uns ausgelieferte Produkt, insbesondere erstellte Software und die erhobenen Messdaten, frei lizensiert sein, sodass Dritten eine Weiterverwendung dieser Daten möglich ist.\\
+Mithilfe von Messstationen werden über Sensoren Daten zur Bestimmung von Wasserqualität gemessen. Die eingesetzten Messstationen müssen den Umwelteinflüssen am Messstandort standhalten. Ihre Gehäuse müssen also wasserdicht und witterungsfest sein. Zudem muss eine praktikable Methode zur Stromversorgung der Messstationen gegeben sein. \commentKayo{Unnötig da wir das Festnetz benutzen}\rem{Dies bedeutet, dass diese entweder fest ans Netz angeschlossen werden, oder ein System mit Akku entwickelt werden muss, das über eine hohe Lebensdauer verfügt und rechtzeitig warnt, wenn ein Akkuaustausch nötig ist.}\\
+Die gemessenen Daten werden über LoRaWAN an TTN übertragen. Anschließend werden diese Daten über eine der verfügbaren Schnittstellen aus dem TTN an einen Datenbankserver weitergeleitet und dort persistent gespeichert. Die Daten werden strukturiert abgelegt, sodass erkenntlich ist, um welchen Sensor es sich handelt und wie die Daten zu interpretieren sind. Weiterhin sollen die persistent gespeicherten Daten Dritten über eine oder mehrere Schnittstellen zugänglich gemacht werden.
+
+\subsection{Gruppen von Anforderungen}
+
+\descriptionWhat{Gewählte Anforderungsgruppierung (sofern vorhanden)}
+
+\subsection{Funktionale Anforderungen}
+
+\descriptionWhat{präzisierte funktionale Anforderungen}
+
+Die folgende Komponente und Funktionen müssen geboten werden:
+
+\begin{itemize}
+	\item Eine Messstation der Wasserqualität
+	\item Eine Schnittstelle zwischen einer Messstation und einem Gateway hinzu dem TTN
+	\item Eine Schnittstelle zwischen dem TTN und einem eigenen Server
+	\item Ein Datenbanksystem für die Speicherung von Daten vom TTN
+	\item Eine Schnittstelle zwischen dem Server und einem Anwender
+\end{itemize}
+
+\paragraph{\uline{Messstation}}
+Eine Messstation besteht aus Sensoren zur Bestimmung der Wasserqualität, einem Arduino Uno, einem Dragino-Shield sowie einem Gehäuse. Als Sensoren werden ein pH-Wert, ein Wassertrübheits-, sowie ein Wassertemperatursensor verwendet. Der Arduino Uno ließt \commentKayo{Wie oft?}regelmäßig die Werte der Sensoren und verschickt sie mit Hilfe des Dragino-Shields durch einen Gateway über TTN.
+\uline{Programm als eine Schnittstelle zwischen einer Messstation und einem Gateway zum TTN}
+Das Gerät der Messtation muss in einem Konto vom TTN registriert werden. Dazu muss man das Benutzerkonto von der TSB als \glqq Collaborator\grqq{} einstellen, so dass die Messdaten zum TSB-Server gesendet werden können.
+Auf dem Arduino muss ein Programm geladen werden, welches die Pinbelegung der Sensoren und die Kommunikation über LoRaWAN ermöglicht. Zur Programmierung soll die Arduino-IDE verwendet werden.
+Das vom TTN angebotenen Programm kann verwendet werden. Dazu müssen der eigene „LoRaWAN network session key\grqq{} , \glqq LoRaWAN application session key\grqq{}  und \glqq LoRaWAN end-device address\grqq{} definiert werden, welche im TTN-Konto zu finden sind.
+
+\paragraph{\uline{Datenbanksystem}}
+Eine relationale Datenbank wird verwendet. Die Daten werden in der Form von XXX gespeichert.
+
+\paragraph{\uline{Schnittstelle zwischen dem TTN und dem Server}}
+Die vom TTN angebotenen Applikation, \commentKayo{Noch nicht fest!}Node.js, wird als eine Schnittstelle verwendet. 
+
+\paragraph{\uline{Schnittstelle zwischen dem Server und einem Anwender}}
+Der Server stellt Dritten die Daten in \commentKayo{Genau geschrieben z.B. JSON?}einem einfachen Format zur Verfügung (Open Data).
+
+Die oben aufgeführten Teilkomponenten und -funktionen werden in Kapitel 4 aufgeführt.
+
+\subsection{Nichtfunktionale Anforderungen}
+
+\descriptionWhat{präzisierte nichtfunktionale Anforderungen}
+
+\begin{itemize}
+	\item Wasserdichtigkeit eines Gehäuse und Sensoren
+	\item \commentKayo{Ist hier nötig? \\ \glqq wie\grqq{} genau regelmäßig?}Sensoren liefern regelmäßige Messdaten
+	\item Energieversorgung
+	\item Funktionalität und Performance des Servers
+\end{itemize}
+
+\paragraph{\uline{Wasserdichtigkeit}}
+Ein wasserdichte Gehäuse für die Messstation hält den Witterungen am Standort Kupfergraben/Spree statt. Das Gehäuse muss mindestens der Schutzart IP65 entsprechen. Die Sensoren müssen ebenfalls wasserdicht gemacht werden.
+
+\paragraph{\uline{Energieversorgung}}
+Die Messstation wird durch das Festnetz betrieben. Das Festnetz kann direkt vom Filteranlage des Vereins Flussbad Berlin besorgt werden.
+
+\paragraph{\uline{Server}}
+Wegen des leichten Aufwand bei Administration und der genügenden Funktionalitäten wird XXX von ZZZ als der zentrale Server für die Datenspeicherung verwendet. Beschreibung der Performance-Anforderung, Beschreibung eines Sicherheitskonzept
+
+\newpage
+
+\section{Fachliche Konzeption}
+
+\descriptionWhat{Vollständige Umsetzungsbeschreibung der konkreten Lösung}
+
+\subsection{z.B. Ziel- Nutzergruppe}
+
+\descriptionWhat{Zielgruppendefinition}
+
+Primäre Zielgruppen sind die Technoligiestiftung Berlin (TSB) und der Verein Flussbad Berlin (VFB). Des weiteren  sind die erhobenen Daten für Dritte zugänglich und relevant. Die TSB ist als Auftraggeber von besonderer Bedeutung, das fertige Produkt muss ihren Anforderungen entsprechen. Der VFB ist als Partner für die Messstandorte besonders für die Erprobungsphase wichtig. Der Prototyp muss eventuell auch an die Gegebenheiten des vom VFB zur Verfügung gestellten Standortes angepasst werden.
+
+\subsection{z.B. Inhaltlicher Aufbau/Komponenten}
+
+\descriptionWhat{Dokumentenstruktur, Web-Seitenstruktur, Seitenstruktur Bauteile, Konstruktionspläne}
+
+\newpage
+
+\section{Entwicklungs- und Produktionsrahmenbedingungen}
+
+Die Messstationen bestehen im Kern aus einem Arduino Uno sowie dem Dragino-Shield. Daran angeschlossen werden die Sensoren zur Messung der Wasserqualität. Auf jeden Fall müssen ein pH-Wert, ein Wassertrübheits-, sowie ein Wassertemperatursensor vorhanden sein. Optional zur Bestimmung der Wasserqualität sind ein Leitfähigkeitssensor und ein Sensor zur Bestimmung der Menge des im Wasser gelösten Sauerstoffs. Auch wird ein geeignetes Gehäuse für die Station benötigt. 
+Aufgrund der mangelhaften Funknetzstärke an dem Messorten muss noch mind. Ein TTN Gateway installiert werden. Der geplante Standort ist der Versuchsfilter des Vereins Flussbad Berlin. Die benötigte Hardware wird duch die Technologiestiftung Berlin gestellt. 
+Softwareseitig wird eine Komponente zum Abgreifen der Messdaten aus dem TTN, ein Datenbanksystem für die Speicherung (Software auf dem Datenbankserver), eine Web-Applikation zum Anzeigen, sowie eine Schnittstelle (API) zum erweiterten Zugriff auf die Messdaten. Die Messinstrumente werden durch zu entwickelnde Software auf dem Arduino ausgewertet, diese Messdaten werden anschließend an TTN versendet. 
+Technisch begrenzt werden die Messstationen vom Energieverbrauch sowie der Datenrate bei TTN. Für das benutzte (freie) 868MHz Funkband besteht die Sendezeitbegrenzung von max. 1\% einer Stunde von Seiten der Bundesnetzagentur. 
+Finanzielle Grenzen sind dem Projekt von Seiten des Budgets der TSB gesetzt.
+
+\section{Systemschnittstellen}
+
+\descriptionWhat{Soll-Darstellung}
+
+\subsection{HW/SW-Konfiguration}
+
+\descriptionWhat{Welche HW/SW-Konfigurationen sind notwendig}
+
+\newpage
+
+\section{Prozessschnittstellen}
+
+\descriptionWhat{Soll-Darstellung}
+
+\subsection{Workflow-Integration}
+
+\descriptionWhat{Beschreibung der Integration in existierende, angrenzende Workflows / Prozesse
+Beschreibung der neuen Workflow-Landschaft}
+
+\newpage
+
+\section{Risiken}
+
+
+\newpage
+
+\section{Einverständnis-Erklärung}
+
+Die Parteien bestätigen, dass der Inhalt dieses Pflichtenheftes die jeweiligen vertraglichen Verpflichtungen darstellt. Es besteht gemeinsames Einverständnis, dass das Pflichtenheft im Laufe des Projektes einvernehmlich schriftlich geändert werden kann.
+
+\begin{table}[H]
+	\begin{tabularx}{\textwidth}{ |m{2cm}Xm{1.2cm}X| }
+		\hline
+		\multicolumn{4}{|c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		Unterschrift: & \makebox[0.3\columnwidth]{\dotfill} & Datum: & \makebox[0.3\columnwidth]{\dotfill} \\
+		\multicolumn{4}{|c|}{} \\
+		Name: & \makebox[0.3\columnwidth]{\dotfill} & \multicolumn{2}{c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		Unterschrift: & \makebox[0.3\columnwidth]{\dotfill} & Datum: & \makebox[0.3\columnwidth]{\dotfill} \\
+		\multicolumn{4}{|c|}{} \\
+		Name: & \makebox[0.3\columnwidth]{\dotfill} & \multicolumn{2}{c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		Unterschrift: & \makebox[0.3\columnwidth]{\dotfill} & Datum: & \makebox[0.3\columnwidth]{\dotfill} \\
+		\multicolumn{4}{|c|}{} \\
+		Name: & \makebox[0.3\columnwidth]{\dotfill} & \multicolumn{2}{c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		Unterschrift: & \makebox[0.3\columnwidth]{\dotfill} & Datum: & \makebox[0.3\columnwidth]{\dotfill} \\
+		\multicolumn{4}{|c|}{} \\
+		Name: & \makebox[0.3\columnwidth]{\dotfill} & \multicolumn{2}{c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		\multicolumn{4}{|c|}{} \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+\end{document}
