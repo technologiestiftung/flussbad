@@ -7,6 +7,7 @@ ngerman,
 \usepackage{babel}	%übersetzt die englischen überschriften ins deutche
 					% damit sind \tableofcontents und co gemeint
 
+\usepackage[ngerman]
 \usepackage[utf8]{inputenc}
 \usepackage[demo]{graphicx}
 \usepackage[hidelinks]{hyperref}
@@ -183,7 +184,7 @@ ngerman,
 		Node &  \\
 		\hline
 		Gateway & Eine Empfangstation, welche die von Nodes gesendeten Nachrichten empfängt und über das Internet an die Server von TTN weiterleitet. \\
-		\hline  
+		\hline
 	\end{tabularx}
 \end{table}
 
@@ -194,7 +195,7 @@ ngerman,
 \subsubsection{Projektinitiierung und -zielsetzung}
 
 \begin{itshape}
-	Kurze Darstellung des Projektanlasses und Nennung des Projektziels. 
+	Kurze Darstellung des Projektanlasses und Nennung des Projektziels.
 	Nennung des Auftraggebers etc.
 \end{itshape}
 
@@ -328,7 +329,7 @@ Das vom TTN angebotenen Programm kann verwendet werden. Dazu müssen der eigene 
 Eine relationale Datenbank wird verwendet. Die Daten werden in der Form von XXX gespeichert.
 
 \paragraph{\uline{Schnittstelle zwischen dem TTN und dem Server}}
-Die vom TTN angebotenen Applikation, \commentKayo{Noch nicht fest!}Node.js, wird als eine Schnittstelle verwendet. 
+Die vom TTN angebotenen Applikation, \commentKayo{Noch nicht fest!}Node.js, wird als eine Schnittstelle verwendet.
 
 \paragraph{\uline{Schnittstelle zwischen dem Server und einem Anwender}}
 Der Server stellt Dritten die Daten in \commentKayo{Genau geschrieben z.B. JSON?}einem einfachen Format zur Verfügung (Open Data).
@@ -375,13 +376,34 @@ Primäre Zielgruppen sind die Technoligiestiftung Berlin (TSB) und der Verein Fl
 
 \section{Entwicklungs- und Produktionsrahmenbedingungen}
 
-Die Messstationen bestehen im Kern aus einem Arduino Uno sowie dem Dragino-Shield. Daran angeschlossen werden die Sensoren zur Messung der Wasserqualität. Auf jeden Fall müssen ein pH-Wert, ein Wassertrübheits-, sowie ein Wassertemperatursensor vorhanden sein. Optional zur Bestimmung der Wasserqualität sind ein Leitfähigkeitssensor und ein Sensor zur Bestimmung der Menge des im Wasser gelösten Sauerstoffs. Auch wird ein geeignetes Gehäuse für die Station benötigt. 
-Aufgrund der mangelhaften Funknetzstärke an dem Messorten muss noch mind. Ein TTN Gateway installiert werden. Der geplante Standort ist der Versuchsfilter des Vereins Flussbad Berlin. Die benötigte Hardware wird duch die Technologiestiftung Berlin gestellt. 
-Softwareseitig wird eine Komponente zum Abgreifen der Messdaten aus dem TTN, ein Datenbanksystem für die Speicherung (Software auf dem Datenbankserver), eine Web-Applikation zum Anzeigen, sowie eine Schnittstelle (API) zum erweiterten Zugriff auf die Messdaten. Die Messinstrumente werden durch zu entwickelnde Software auf dem Arduino ausgewertet, diese Messdaten werden anschließend an TTN versendet. 
-Technisch begrenzt werden die Messstationen vom Energieverbrauch sowie der Datenrate bei TTN. Für das benutzte (freie) 868MHz Funkband besteht die Sendezeitbegrenzung von max. 1\% einer Stunde von Seiten der Bundesnetzagentur. 
+Die Messstationen bestehen im Kern aus einem Arduino Uno sowie dem Dragino-Shield. Daran angeschlossen werden die Sensoren zur Messung der Wasserqualität. Auf jeden Fall müssen ein pH-Wert, ein Wassertrübheits-, sowie ein Wassertemperatursensor vorhanden sein. Optional zur Bestimmung der Wasserqualität sind ein Leitfähigkeitssensor und ein Sensor zur Bestimmung der Menge des im Wasser gelösten Sauerstoffs. Auch wird ein geeignetes Gehäuse für die Station benötigt.
+Aufgrund der mangelhaften Funknetzstärke an dem Messorten muss noch mind. Ein TTN Gateway installiert werden. Der geplante Standort ist der Versuchsfilter des Vereins Flussbad Berlin. Die benötigte Hardware wird duch die Technologiestiftung Berlin gestellt.
+Softwareseitig wird eine Komponente zum Abgreifen der Messdaten aus dem TTN, ein Datenbanksystem für die Speicherung (Software auf dem Datenbankserver), eine Web-Applikation zum Anzeigen, sowie eine Schnittstelle (API) zum erweiterten Zugriff auf die Messdaten. Die Messinstrumente werden durch zu entwickelnde Software auf dem Arduino ausgewertet, diese Messdaten werden anschließend an TTN versendet.
+Technisch begrenzt werden die Messstationen vom Energieverbrauch sowie der Datenrate bei TTN. Für das benutzte (freie) 868MHz Funkband besteht die Sendezeitbegrenzung von max. 1\% einer Stunde von Seiten der Bundesnetzagentur.
 Finanzielle Grenzen sind dem Projekt von Seiten des Budgets der TSB gesetzt.
 
 \section{Systemschnittstellen}
+
+Das System verf\"ugt \"uber mehrere Komponenten, die \"uber verschiedene
+Schnittstellen miteinander kommunizieren.
+
+\subsection{Messstation -> TTN}
+Eine Messstation muss \"uber eine Weboberfl\"ache manuell in einer Applikation
+eines TTN-Konto registriert werden. Ist dies erfolgt, werden die Daten \"uber
+das LoRaWAN-Protokoll von der Messstation an TTN \"ubertragen.
+
+\subsection{TTN -> Server}
+TTN stellt die empfangenen Daten mithilfe sog. \glqq Integrations\grqq{} zur Verf\"ugung.
+Eine \glqq Integration\grqq{} muss der jeweiligen Applikation, in der die Messstation registriert
+wurde, hinzugef\"ugt werden.
+In diesem Fall handelt es sich um eine \glqq HTTP-Integration\grqq. In dieser wird eine URL zu
+einem Webserver hinterlegt, an den die von TTN empfangenen Daten im JSON-Format
+weitergeleitet werden. Der Server ist anschlie{\ss}end
+
+\subsection{Server -> \"Offentlichkeit}
+Die gemessenen Daten werden Dritten \"uber einen HTTP-Server im JSON-Format zur Verf\"ugung gestellt.
+Diese werden \"uber die Domain \href{http://www.berlinerdaten.de/} abrufbar sein.
+
 
 \descriptionWhat{Soll-Darstellung}
 
