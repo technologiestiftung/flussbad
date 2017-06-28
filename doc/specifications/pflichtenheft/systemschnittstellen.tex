@@ -3,12 +3,12 @@
 Das System verf\"ugt \"uber mehrere Komponenten, die \"uber verschiedene
 Schnittstellen miteinander kommunizieren.
 
-\subsection{Messstation \rightarrow TTN}
+\subsection{Messstation zu TTN}
 Eine Messstation muss \"uber eine Weboberfl\"ache manuell in einer Applikation
 eines TTN-Konto registriert werden. Ist dies erfolgt, werden die Daten \"uber
 das LoRaWAN-Protokoll von der Messstation an TTN \"ubertragen.
 
-\subsection{TTN \rightarrow Server}
+\subsection{TTN zu Server}
 TTN stellt die empfangenen Daten mithilfe sog. \glqq Integrations\grqq{} zur Verf\"ugung.
 Eine \glqq Integration\grqq{} muss der jeweiligen Applikation, in der die Messstation registriert
 wurde, hinzugef\"ugt werden.
@@ -16,7 +16,7 @@ In diesem Fall handelt es sich um eine \glqq HTTP-Integration\grqq. In dieser wi
 einem Webserver hinterlegt, an den die von TTN empfangenen Daten im JSON-Format
 weitergeleitet werden. Der Server ist anschlie{\ss}end
 
-\subsection{Server \rightarrow \"Offentlichkeit}
+\subsection{Server zu \"Offentlichkeit}
 Die gemessenen Daten werden Dritten \"uber einen HTTP-Server im JSON-Format zur Verf\"ugung gestellt.
 Diese werden \"uber die Domain \href{http://www.berlinerdaten.de/} abrufbar sein.
 
