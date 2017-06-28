@@ -38,12 +38,25 @@
 
 \subsubsection{Glossar}
 
-\begin{table}[H]
-	\begin{tabularx}{\textwidth}{ |l|X| }
+{
+	\tabulinesep=2mm
+	\begin{longtabu} to \textwidth { |l|X| }
 		\hline  %table header
 		\rowcolor[gray]{.8}%
 		\rule{0pt}{18pt}%
 		\textbf{Abkürzung} & \textbf{Erläuterung} \\
+		\endfirsthead
+		
+		%table header of the next page
+		\multicolumn{2}{c}%
+		{\textit{Fortsetzung von vorheriger Seite}} \\
+		\hline
+		\rowcolor[gray]{.8}%
+		\rule{0pt}{18pt}%
+		\textbf{Abkürzung} & \textbf{Erläuterung} \\
+		\hline
+		\endhead
+		
 		\hline  %table content
 		LoRaWAN & Ein energiesparendes Funkprotokoll, in Europa im 868MHz-Band. Es ermöglicht Endgeräten das Versenden von Daten über Funk an das Internet, indem die Daten durch Basisstationen aufgefangen und an Netzwerkserver weitergeleitet werden, auf welche über Schnittstellen aus dem Internet heraus zugegriffen werden kann. Auf umgekehrten Wege können auch Daten vom Internet heraus an die Endgeräte gesendet werden. \\
 		\hline
@@ -77,8 +90,8 @@
 			   in einer einfach lesbaren Textform zum Zweck des Datenaustauschs zwischen
 			   Anwendungen. \\
 		\hline
-	\end{tabularx}
-\end{table}
+	\end{longtabu}
+}
 
 \subsubsection{Ablage des Dokuments}
 
@@ -100,8 +113,6 @@ Die TSB vermittelt Wissen über digitale Chancen und Herausforderungen, entwicke
 Ziel des Projektes ist es Messstationen mit Sensoren auszustatten, erfolgreich in Betrieb zu nehmen, Daten zu sammeln, und diese anschließend zentral auf einen Datenbankserver abzulegen, um sie für weitere Verarbeitung verfügbar zu machen..
 
 \subsubsection{Projekt-Meilensteine}
-
-\input{}
 
 \descriptionWhat{Darstellung der aktuellen Meilensteinplanung}
 
