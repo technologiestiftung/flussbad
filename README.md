@@ -11,7 +11,7 @@ Kayo: 1.4, 4:usecase, 4:ER, Anhänge
 ALLE: 3.2
 
 ### Document Integration
-- Teile von Philipp und Kayo in .doc müssen in .tex ingegriert werden, falls die anderen damit arbeiten.
+- Teile ~~von Philipp~~ und Kayo in .doc müssen in .tex ingegriert werden, falls die anderen damit arbeiten.
 - Dokumente in Anhänge müssen als PDF zur finalen Version vom Pflichtenheft angehängt werden.
 - Sind Veränderungen auf das ER-Modell oder den Anwendungsfall vorhanden, müssen sie jeweils mit [ER-online Tool](https://www.draw.io) und MagicDraw bearbeitet werden.
 
