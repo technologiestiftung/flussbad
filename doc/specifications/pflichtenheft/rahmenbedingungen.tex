@@ -1,0 +1,7 @@
+\section{Entwicklungs- und Produktionsrahmenbedingungen}
+
+Die Messstationen bestehen im Kern aus einem Arduino Uno sowie dem Dragino-Shield. Daran angeschlossen werden die Sensoren zur Messung der Wasserqualität. Auf jeden Fall müssen ein pH-Wert, ein Wassertrübheits-, sowie ein Wassertemperatursensor vorhanden sein. Optional zur Bestimmung der Wasserqualität sind ein Leitfähigkeitssensor und ein Sensor zur Bestimmung der Menge des im Wasser gelösten Sauerstoffs. Auch wird ein geeignetes Gehäuse für die Station benötigt.
+Aufgrund der mangelhaften Funknetzstärke an dem Messorten muss noch mind. Ein TTN Gateway installiert werden. Der geplante Standort ist der Versuchsfilter des Vereins Flussbad Berlin. Die benötigte Hardware wird duch die Technologiestiftung Berlin gestellt.
+Softwareseitig wird eine Komponente zum Abgreifen der Messdaten aus dem TTN, ein Datenbanksystem für die Speicherung (Software auf dem Datenbankserver), eine Web-Applikation zum Anzeigen, sowie eine Schnittstelle (API) zum erweiterten Zugriff auf die Messdaten. Die Messinstrumente werden durch zu entwickelnde Software auf dem Arduino ausgewertet, diese Messdaten werden anschließend an TTN versendet.
+Technisch begrenzt werden die Messstationen vom Energieverbrauch sowie der Datenrate bei TTN. Für das benutzte (freie) 868MHz Funkband besteht die Sendezeitbegrenzung von max. 1\% einer Stunde von Seiten der Bundesnetzagentur.
+Finanzielle Grenzen sind dem Projekt von Seiten des Budgets der TSB gesetzt.
