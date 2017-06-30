@@ -1,18 +1,17 @@
 \section{Fachliche Konzeption}
 
-\descriptionWhat{Vollständige Umsetzungsbeschreibung der konkreten Lösung}
-
 \subsection{z.B. Ziel- Nutzergruppe}
-\descriptionWhat{Zielgruppendefinition}
 
 Primäre Zielgruppen sind die Technologiestiftung Berlin (TSB) und der Verein Flussbad Berlin (VFB). Des weiteren sind die erhobenen Daten für Dritte zugänglich und relevant. Die TSB ist als Auftraggeber von besonderer Bedeutung. Der VFB ist als Partner für die Messstandorte besonders für die Erprobungsphase wichtig. Der Prototyp muss eventuell auch an die Gegebenheiten des vom VFB zur Verfügung gestellten Standortes angepasst werden.
 
 \subsection{z.B. Inhaltlicher Aufbau/Komponenten}\label{subsec:con_strct_comp}
 
-\descriptionWhat{Dokumentenstruktur, Web-Seitenstruktur, Seitenstruktur Bauteile, Konstruktionspläne}
-
 \subsubsection{Messstation}
-Die Messstation besteht aus einem Arduino Uno als basisplatform (siehe~\autoref{fig:ardoinoUno}). Einem Dragino-Shiled für die Kommunikation mittels des LoRaWAN Protokoll (siehe~\autoref{fig:draginoShield}). Für die Erfassung der Wasserdaten kommen Sensoren für pH-Wert, Trübheit sowie Temperatur zum Einsatz. Der Arduino und das Dragino-Shiled sind in einem Wetterfesten Gehäuse untergebracht. Das Gehäuse hat mindestens die Schutzklasse IP65 damit die Komponenten ausreichend gegen nässe geschützt sind. Die Sensoren sind außerhalb des Gehäuses und durch Wasserfeste Kabeldurchführungen verbunden. Die Energieversorgung der Messstation wird über eine externe Stromversorgung sichergestellt.
+Die Messstation besteht aus einem Arduino Uno als Basisplattform (siehe~\autoref{fig:ardoinoUno}) und einem Dragino-Shield für die Kommunikation mittels des LoRaWAN Protokoll
+(siehe~\autoref{fig:draginoShield}). Für die Erfassung der Wasserdaten kommen Sensoren für pH-Wert, Trübheit, sowie Temperatur zum Einsatz.
+Der Arduino und das Dragino-Shield sind in einem wetterfesten Gehäuse untergebracht. Das Gehäuse besitzt mindestens die Schutzklasse IP65, damit die Komponenten ausreichend gegen
+Nässe geschützt sind. Die Sensoren sind außerhalb des Gehäuses und durch wasserfeste Kabeldurchführungen verbunden. Die Energieversorgung der Messstation wird über eine externe
+Stromversorgung sichergestellt.
 
 \begin{figure}[H]
 	\centering
@@ -30,7 +29,8 @@ Die Messstation besteht aus einem Arduino Uno als basisplatform (siehe~\autoref{
 \end{figure}
 
 \subsubsection{Datenbankserver}
-Für das speichern der empfangenen Daten kommt ein MySQL Datenbanksystem zum Einsatz. Hier werden sämtliche vom TTN übermittelten Daten abgelegt. Die Daten werden nicht im Rohformat gespeichert. Nach Auswertung des JSON Strings sind die Werte nach Metadaten, Messwert und Node in der Datenbank abgelegt.
+Für das Speichern der empfangenen Daten kommt ein MySQL Datenbanksystem zum Einsatz. Hier werden sämtliche von TTN übermittelten Daten abgelegt. Die Daten werden nicht im
+Rohformat gespeichert, sondern soweit aufbereitet, dass nach ihrer Auswertung Metadaten, Messwert und Node strukturiert in der Datenbank liegen.
 
 \subsubsection{Datenmodell}
 \begin{figure}[H]
@@ -41,12 +41,14 @@ Für das speichern der empfangenen Daten kommt ein MySQL Datenbanksystem zum Ein
 \end{figure}
 
 \subsubsection{Webserver}
-Der Webserver hat folgende Funktionalität:
+Der Webserver besitzt folgende Funktionalitäten:
 \begin{itemize}
-	\item Eine Schnittstelle für TTN um die Daten von dort zu empfangen. Die Daten werden im JSON Format übertragen. Bei Empfang werden diese dann in der Datenbank gespeichert. Da es sich um eine URL basierte schnittstelle handelt werden nur POST-request's verarbeitet. So wird verhindert das ein URL aufruf mittels eines Browsers fremddaten hinzufühgt.
-	\item Eine Schnittstelle die zum Abrufen der gespeicherten Daten. Die Daten werden mittels eines GET-request und Parametern in der Abfrage bereitgestellt. Ein einfaches Web-Formular dient als Generator zum erstellen der URL.
+	\item Eine Schnittstelle für TTN, um die Daten von dort zu empfangen. Die Daten werden im JSON Format übertragen.
+		  Bei Empfang werden diese dann in der Datenbank gespeichert. Da es sich um eine URL basierte Schnittstelle handelt, werden nur POST-request's verarbeitet.
+		  So wird verhindert das durch ein Aufrufen der URL mittels eines Browsers fremde Daten hinzufügt werden.
+	  \item Eine Schnittstelle, die f\"ur das Abrufen der gespeicherten Daten verantwortlich ist. Die Daten werden mittels eines GET-request und Parametern in der Abfrage bereitgestellt. Ein einfaches Web-Formular dient als Generator zum erstellen der URL.
 \end{itemize}
-Desweiteren dient der Webserver zur präsentation des Projektes.
+Desweiteren dient der Webserver zur Präsentation des Projektes.
 
 \subsubsection{Use Case}
 \begin{figure}[H]
