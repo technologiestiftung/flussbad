@@ -20,7 +20,10 @@ weitergeleitet werden. \commentMark{ist anschließend?}Der Server ist anschlie{\
 Die gemessenen Daten werden Dritten \"uber einen HTTP-Server im JSON-Format zur Verf\"ugung gestellt.
 Diese werden \"uber die Domain \href{http://www.berlinerdaten.de/} abrufbar sein.
 
-
 \subsection{HW/SW-Konfiguration}
 
-\descriptionWhat{Welche HW/SW-Konfigurationen sind notwendig}
+Im Quelltext der Software, die auf dem Arduino l\"auft, m\"ussen bestimmte, von TTN vorgegebene
+Werte eingetragen werden. Hierzu z\"ahlen die zwei Schl\"ussel (\glqq Network Session Key\grqq,
+\glqq Application Session Key\grqq), die zur Herstellung eines sicheren Kommunikationskanals
+zwischen Messstation und TTN n\"otig sind, und die sog. \glqq Device Address\grqq, mit der
+das jeweilige Endger\"at (hier Messstation) eindeutig identifiziert wird.
