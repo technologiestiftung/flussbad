@@ -36,7 +36,9 @@ Die serverseitige Implementierung und der Aufbau einer Messstation sollen parall
 \subsubsection{Server Implementierung}
 
 Implementation des im Kapitel \ref{subsec:con_strct_comp} beschriebenen Datenbankmodells. Der Webserver hat eine Schnittstelle für die Daten die vom TTN kommen. Diese Schnittstelle Es werden nur POST-Request's verarbeitet. Es muss gewährleistet werden das der Client der den Request ausführt vom TTN kommt. Das TTN versendet die im JSON Format. Das heißt es werden nur Daten im JSON Format akzeptiert. GET-Request's auf der gleichen URL werden mit einem 404-error zurückgewiesen. Sämtliche Request's müssen mittels HTTPS erfolgen um sicherzustellen das es keine Datenmanipulation beim Einfügen der Daten gibt.
-Der Webserver hat eine weitere Schnittstelle um die Daten Dritten bereitzustellen. Für das abrufen der Daten erfolgt mittels GET-Request's.
+Der Webserver hat eine weitere Schnittstelle um die Daten Dritten bereitzustellen. Das Abrufen der Daten erfolgt mittels GET-Request's. Die Daten Abfrage erfolgt durch Paramerter die mit in der URL übergeben werden. Die Antwort des GET-Request erfolgt im JSON Format.
+
+Für das Ein einfaches Formular muss Dritten das generieren der Parameter in der URL ermöglichen die Daten nach ihren bedürfnissen abzufragen.
 
 ------------DRAFT----------vvv\\
 Durch den Datenbankserver werden die Daten vom TTN aufgenommen und in eine Datenbank abgelegt. In der Datenbank sind die Daten mit der in Kapital \ref{subsec:con_strct_comp} geschriebenen Struktur gespeichert. 
