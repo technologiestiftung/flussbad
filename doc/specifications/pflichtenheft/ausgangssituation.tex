@@ -5,21 +5,21 @@
 \descriptionWhat{Ausgangssituation, IST-Situation (aus \glqq Lösersicht\grqq{}; unter Anreicherung mit \glqq Zielkontextwissen\grqq{})}
 
 Ein Node kann durch einen Gateway über The Things Network kommunizieren, welches auf die Technologie LoRaWAN aufbaut. LoRaWAN ist ein funkbasiertes Netzwerkdesign, welches es ermöglicht energiesparend Daten zu versenden. TTN stellt eine Schnittstelle zum Internet bereit und vereinfacht dadurch die Weiterleitung der Messdaten an externe Dienste/Server. Die über LoRaWAN an TTN gesendeten Daten werden bis zum Abruf dieser, jedoch maximal 7 Tage, zwischengespeichert, wenn ihre „Storage Integration“ verwendet wird.
-Gateways sind freiwillig au
+Gateways werden durch Freiwillige betrieben und frei zur Verfügung gestellt.\newline
+Der Verein FLussbad Berlin setzt sich seit 2012 dafür ein, dass im Bereich des Kupfergrabens ein öffentliches Bad erichtet wird. Die notwendige Reinigung des Flusswassers soll durch einen ökologischen Filter geschehen. Ein Prototyp dieses Filters wird im Juli 2017 (KW28) am Kupfergraben installiert.
 
 \subsection{Auftraggeber}
 
 \descriptionWhat{Einordnendes Profil des Auftraggebers aus \glqq Lösersicht\grqq{}}
 
 Bereits seit 2014 beteiligt die TSB sich aktiv an der Förderung der Strategie bezüglich der offenen Daten in Berlin mit verschiedenen Unternehmen, Behörden und Instituten.
-Im Rahmen von einem solcher Projekte organisierte sie bereits am 05.05.2017 das erste \glqq LoRaWAN-Treffen\grqq{}  in Zusammenarbeit mit The Things Network Berlin, wobei eine Plattform der Begegnung für viele Interessanten geschafft wurde, in der sie eigene Gedanken miteinander austauschen konnten.
-Des Weiteren hält sie am 23.05.2017 das zweite Treffen, in dem sie weitere Möglichkeiten der Anwendungsfälle vorstellen wird, damit die Interessanten sich vernünftig mit der LoRaWAN-Technik beschäftigen können.
-Trotz der Behandlung der sensiblen Umweltdaten in der Stadt sollte das Projekt von der TSB durch ihre eigene Kontakt zu den Behörden und anderen Einrichtungen stark unterstützt werden.
-Zu den direkt Beteiligten an diesem Projekt gehören Dr. Christian Hammel, Dr. Benjamin Seibel und Sebastian Rauer.
+Im Rahmen von einem solcher Projekte organisierte sie bereits am 05.05.2017 das erste \glqq LoRaWAN-Treffen\grqq{}  in Zusammenarbeit mit The Things Network Berlin, wobei eine Plattform der Begegnung für viele Interessanten geschafft wurde, auf welcher sie eigene Gedanken miteinander austauschen konnten.\newline
+Am 23.05.2017 lädt die TSB zum zweiten Treffen, auf welchem sie weitere Möglichkeiten der Anwendungsfälle vorstellen wird, mit dem Wunsch den Anwesenden neue Denkanstöße zu geben und bei der Ideenfindung zu helfen.\newline
+Trotz der Behandlung der sensiblen Umweltdaten in der Stadt sollte das Projekt von der TSB durch ihre eigene Kontakt zu den Behörden und anderen Einrichtungen stark unterstützt werden.\newline
 
 \subsection{Zielbeschreibung}
 
 \descriptionWhat{Fachliche Zielinterpretation aus Sicht der Umsetzung (ohne technische Umsetzungsbeschreibung), angenommener sachlicher Effekt usw.}
 
-Es sollen robuste und wartungsarme Messstationen zu Umweltdaten entstehen. Diese Messstationen werden am Kupfergraben und der Spree betrieben, um die Wasserqualität im Kontext des Testfilters des Vereins Flussbad Berlin zu messen. \commentKayo{In Anlass  und Glossar umschreiben}Der Verein tritt dafür ein ein Flussbad am Kupfergraben, auf Höhe des Lustgartens, zu errichten. Zur dafür nötigen Verbesserung der Wasserqualität im Kupfergraben ist der Betrieb einer Filteranlage notwendig, ein Prototyp dieser wird zeitnah \commentKayo{Noch genauer. Juli?} in Betrieb genommen werden. Die Veränderung der Wasserqualität durch diesen Prototypen soll mit den Sensoren unserer Messstationen gemessen werden. Hierfür ist es zusätzlich notwendig, dass ein Gehäuse entworfen wird, welches den Umwelteinflüssen am Kupfergraben standhält.\\
-Die Messstation wird die Messdaten über ein Gateway an TTN versenden. Ein Datenbankserver muss über eine der Schnittstellen von TTN die Daten \commentKayo{Genauere Beschreibung benötigt.}regelmäßig laden und in der eigenen Datenbank speichern. Die Serversoftware und die Datenbank müssen so umgesetzt werden, dass es für Dritte einfach möglich ist die Messdaten abzurufen.
+Es sollen robuste und wartungsarme Messstationen zu Umweltdaten entstehen. Diese Messstationen werden am Kupfergraben und der Spree betrieben, um die Wasserqualität im Kontext des Testfilters des Vereins Flussbad Berlin zu messen. Die Veränderung der Wasserqualität durch diesen Prototypen soll mit den Sensoren unserer Messstationen gemessen werden. Hierfür ist es zusätzlich notwendig, dass ein Gehäuse entworfen wird, welches den Umwelteinflüssen am Kupfergraben standhält.\newline
+Die Messstation wird die Messdaten über ein Gateway an TTN versenden. Ein Datenbankserver muss über eine der Schnittstellen von TTN die Daten laden sobald sie durch TTN bereit gestellt wurden und in der eigenen Datenbank speichern. Die Serversoftware und die Datenbank müssen so umgesetzt werden, dass es für Dritte einfach möglich ist die Messdaten abzurufen.\commentHeiko{Wie oft? -> so oft wie von Gesetz erlaubt -> vernünftige Formulierung finden}
