@@ -5,3 +5,60 @@ Aufgrund der mangelhaften Funknetzstärke an dem Messorten muss noch mind. Ein T
 Softwareseitig wird eine Komponente zum Abgreifen der Messdaten aus dem TTN, ein Datenbanksystem für die Speicherung (Software auf dem Datenbankserver), eine Web-Applikation zum Anzeigen, sowie eine Schnittstelle (API) zum erweiterten Zugriff auf die Messdaten. Die Messinstrumente werden durch zu entwickelnde Software auf dem Arduino ausgewertet, diese Messdaten werden anschließend an TTN versendet.
 Technisch begrenzt werden die Messstationen vom Energieverbrauch sowie der Datenrate bei TTN. Für das benutzte (freie) 868MHz Funkband besteht die Sendezeitbegrenzung von max. 1\% einer Stunde von Seiten der Bundesnetzagentur.
 Finanzielle Grenzen sind dem Projekt von Seiten des Budgets der TSB gesetzt.
+
+\subsection{Entwicklungsschritte}
+
+\descriptionWhat{In welchen Schritten wird entwickelt/umgesetzt}
+
+Die serverseitige Implementierung und der Aufbau einer Messstation sollen parallel durchgeführt werden. Des Weiteren muss ein Konto der TSB im TTN registriert werden. Als ein eigenes Konto von der Messstation wird eins von den Entwicklern verwendet.
+
+\subsubsection{Server Implementierung}
+\begin{itemize}
+	\item Implementierung eines Datenbankserver mit MySql
+	\item Einrichtung eines Servers und einer Datenbank
+	\item Einpflegen der Daten in die Datenbank
+	\item Definition einer Schnittstelle zwischen dem Server und Client
+	\item Implementierung des Webservers
+\end{itemize}
+
+\subsubsection{Messstation}
+\begin{itemize}
+	\item Aufbau einer Messstation mit der Hardware
+	\item Implementierung eines Programms auf der Messstation
+	\item Test von Versenden der Messdaten und Datenerfassung im TSB-Konto
+	\item Abdichten der Hardware-Komponente
+\end{itemize}
+
+\subsection{Entwicklungsergebnisse}
+
+\descriptionWhat{Was sind die jeweiligen Ergebnisse der Entwicklungsschritte (Prototypenumfang, Fertigstellungsgrad etc.)}
+
+\subsubsection{Server Implementierung}
+Durch den Datenbankserver werden die Daten vom TTN aufgenommen und in eine Datenbank abgelegt. In der Datenbank sind die Daten mit der in Kapital \ref{subsec:con_strct_comp} geschriebenen Struktur gespeichert. Der Webserver sowie die Datenbank sind vom Anbieter 1\&1 gemietet. Der Webserver stellt Clients die Daten in der Form von JSON zur Verfügung.
+
+\subsubsection{Messstation}
+Aufbau einer Messstation mit der Hardware:
+Eine Messstation ist mit den in Kapital \ref{subsec:func_require} geschriebenen Komponenten aufgebaut.
+
+Implementierung eines Programms auf der Messstation:
+Die Rohdaten der Sensoren werden durch den Arduino Uno soweit aufbereitet. Die Messdaten werden mittels des Dragino LoRa Shield versendet.
+
+Test von Versenden der Messdaten und Datenerfassung im TSB-Konto:
+TSB kann auf eine Applikation von einer Messstation zugreifen und ihre Daten in der TTN-Console lesen.
+
+Abdichten der Hardware-Komponente:
+Die einzelne Hardware-Komponente ist wasserdicht und die Messstation ist in einem wasserdichten Gehäuse installiert.
+
+\subsection{Werkzeuge}
+
+\descriptionWhat{Mit welchen Werkzeugen wird umgesetzt}
+
+Zur Entwicklung werden die folgenden Werkzeuge verwendet.
+M.001: etwas
+
+Programm auf der Messstation: Arduino-IDE
+Server:
+
+
+Zur Modellierung eines Datenmodells wird XXX verwendet.
+Zur Bezeichnung eines UML-Diagramms wird XXX verwendet.
