@@ -2,16 +2,12 @@
 
 Allgemein müssen neben allen verwendeten Komponenten auch das von uns ausgelieferte
 Produkt, insbesondere erstellte Software und die erhobenen Messdaten, frei lizensiert
-sein, sodass Dritten eine Weiterverwendung dieser Daten möglich ist.\\
+sein, sodass Dritten eine Weiterverwendung dieser Daten möglich ist.
 
 Mithilfe von Messstationen werden über Sensoren Daten zur Bestimmung von Wasserqualität
 gemessen. Die eingesetzten Messstationen müssen den Umwelteinflüssen am Messstandort
 standhalten. Ihre Gehäuse müssen also wasserdicht und witterungsfest sein. Zudem muss
 eine praktikable Methode zur Stromversorgung der Messstationen gegeben sein.
-\commentKayo{Unnötig da wir das Festnetz benutzen}\rem{Dies bedeutet, dass diese entweder
-fest ans Netz angeschlossen werden, oder ein System mit Akku entwickelt werden muss,
-das über eine hohe Lebensdauer verfügt und rechtzeitig warnt, wenn ein Akkuaustausch
-nötig ist.}\\
 
 Die gemessenen Daten werden über LoRaWAN an TTN übertragen. Anschließend werden diese
 Daten über eine der verfügbaren Schnittstellen aus dem TTN an einen Datenbankserver
@@ -83,8 +79,9 @@ Weitergehend besitzen die Gruppen folgende Untergruppen:
 		die gemessenen Werte zu interpretieren sind.
 
 	\item[M.106]
-		Die Messstation muss in einem TTN Konto registriert und als sog.
-		\glqq Collaborator\grqq{} zum Konto der TSB hinzufgefügt werden.
+		Die Messstation muss in einer sog. \glqq Applikation\grqq{} in einem TTN Konto
+		registriert und als sog. \glqq Collaborator\grqq{} zum TTN-Konto der TSB
+		hinzufgefügt werden.
 
 	\item[M.107]
 		Alle genutzten und von uns erstellten Software-Komponenten sind frei lizensiert.
@@ -115,24 +112,3 @@ Weitergehend besitzen die Gruppen folgende Untergruppen:
 	\item[S.104]
 		Alle genutzten und von uns erstellten Software-Komponenten sind frei lizensiert.
 \end{description}
-
-
-\subsection{Nichtfunktionale Anforderungen}
-
-\descriptionWhat{präzisierte nichtfunktionale Anforderungen}
-
-\begin{itemize}
-	\item Wasserdichtigkeit eines Gehäuse und Sensoren
-	\item \commentKayo{Ist hier nötig? \\ \glqq wie\grqq{} genau regelmäßig?}Sensoren liefern regelmäßige Messdaten
-	\item Energieversorgung
-	\item Funktionalität und Performance des Servers
-\end{itemize}
-
-\paragraph{\uline{Wasserdichtigkeit}}
-Ein wasserdichte Gehäuse für die Messstation hält den Witterungen am Standort Kupfergraben/Spree statt. Das Gehäuse muss mindestens der Schutzart IP65 entsprechen. Die Sensoren müssen ebenfalls wasserdicht gemacht werden.
-
-\paragraph{\uline{Energieversorgung}}
-Die Messstation wird durch das Festnetz betrieben. Das Festnetz kann direkt vom Filteranlage des Vereins Flussbad Berlin besorgt werden.
-
-\paragraph{\uline{Server}}
-Wegen des leichten Aufwand bei Administration und der genügenden Funktionalitäten wird XXX von ZZZ als der zentrale Server für die Datenspeicherung verwendet. Beschreibung der Performance-Anforderung, Beschreibung eines Sicherheitskonzept
