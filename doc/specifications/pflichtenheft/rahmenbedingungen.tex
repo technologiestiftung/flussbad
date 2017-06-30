@@ -14,8 +14,8 @@ Die serverseitige Implementierung und der Aufbau einer Messstation sollen parall
 
 \subsubsection{Server Implementierung}
 \begin{itemize}
-	\item Implementierung eines Datenbankserver mit MySql
 	\item Einrichtung eines Servers und einer Datenbank
+	\item Implementiereung des Datenbankmodels
 	\item Einpflegen der Daten in die Datenbank
 	\item Definition einer Schnittstelle zwischen dem Server und Client
 	\item Implementierung des Webservers
@@ -34,7 +34,14 @@ Die serverseitige Implementierung und der Aufbau einer Messstation sollen parall
 \descriptionWhat{Was sind die jeweiligen Ergebnisse der Entwicklungsschritte (Prototypenumfang, Fertigstellungsgrad etc.)}
 
 \subsubsection{Server Implementierung}
-Durch den Datenbankserver werden die Daten vom TTN aufgenommen und in eine Datenbank abgelegt. In der Datenbank sind die Daten mit der in Kapital \ref{subsec:con_strct_comp} geschriebenen Struktur gespeichert. Der Webserver sowie die Datenbank sind vom Anbieter 1\&1 gemietet. Der Webserver stellt Clients die Daten in der Form von JSON zur Verfügung.
+
+Implementation des im Kapitel \ref{subsec:con_strct_comp} beschriebenen Datenbankmodells. Der Webserver hat eine Schnittstelle für die Daten die vom TTN kommen. Diese Schnittstelle Es werden nur POST-Request's verarbeitet. Es muss gewährleistet werden das der Client der den Request ausführt vom TTN kommt. Das TTN versendet die im JSON Format. Das heißt es werden nur Daten im JSON Format akzeptiert. GET-Request's auf der gleichen URL werden mit einem 404-error zurückgewiesen. Sämtliche Request's müssen mittels HTTPS erfolgen um sicherzustellen das es keine Datenmanipulation beim Einfügen der Daten gibt.
+Der Webserver hat eine weitere Schnittstelle um die Daten Dritten bereitzustellen. Für das abrufen der Daten erfolgt mittels GET-Request's.
+
+------------DRAFT----------vvv\\
+Durch den Datenbankserver werden die Daten vom TTN aufgenommen und in eine Datenbank abgelegt. In der Datenbank sind die Daten mit der in Kapital \ref{subsec:con_strct_comp} geschriebenen Struktur gespeichert. 
+
+Der Webserver sowie die Datenbank sind vom Anbieter 1\&1 gemietet. Der Webserver stellt Clients die Daten in der Form von JSON zur Verfügung.
 
 \subsubsection{Messstation}
 Aufbau einer Messstation mit der Hardware:
