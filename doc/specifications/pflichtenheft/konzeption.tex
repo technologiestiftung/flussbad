@@ -2,16 +2,13 @@
 
 \subsection{z.B. Ziel- Nutzergruppe}
 
-Primäre Zielgruppen sind die Technologiestiftung Berlin (TSB) und der Verein Flussbad Berlin (VFB). Des weiteren sind die erhobenen Daten für Dritte zugänglich und relevant. Die TSB ist als Auftraggeber von besonderer Bedeutung. Der VFB ist als Partner für die Messstandorte besonders für die Erprobungsphase wichtig. Der Prototyp muss eventuell auch an die Gegebenheiten des vom VFB zur Verfügung gestellten Standortes angepasst werden.
+Primäre Zielgruppen sind die Technologiestiftung Berlin und der Verein Flussbad Berlin. Des weiteren sind die erhobenen Daten für Dritte zugänglich und relevant. Die TSB ist als Auftraggeber von besonderer Bedeutung. Der VFB ist als Partner für die Messstandorte besonders für die Erprobungsphase wichtig. Der Prototyp muss eventuell auch an die Gegebenheiten des vom VFB zur Verfügung gestellten Standortes angepasst werden.
 
 \subsection{z.B. Inhaltlicher Aufbau/Komponenten}\label{subsec:con_strct_comp}
 
 \subsubsection{Messstation}
-Die Messstation besteht aus einem Arduino Uno als Basisplattform (siehe~\autoref{fig:ardoinoUno}) und einem Dragino-Shield für die Kommunikation mittels des LoRaWAN Protokoll
-(siehe~\autoref{fig:draginoShield}). Für die Erfassung der Wasserdaten kommen Sensoren für pH-Wert, Trübheit, sowie Temperatur zum Einsatz.
-Der Arduino und das Dragino-Shield sind in einem wetterfesten Gehäuse untergebracht. Das Gehäuse besitzt mindestens die Schutzklasse IP65, damit die Komponenten ausreichend gegen
-Nässe geschützt sind. Die Sensoren sind außerhalb des Gehäuses und durch wasserfeste Kabeldurchführungen verbunden. Die Energieversorgung der Messstation wird über eine externe
-Stromversorgung sichergestellt.
+Die Messstation besteht aus einem Arduino Uno als Basisplattform (siehe~\autoref{fig:ardoinoUno}) und einem Dragino-Shield für die Kommunikation mittels des LoRaWAN Protokoll (siehe~\autoref{fig:draginoShield}). Für die Erfassung der Wasserdaten kommen Sensoren für pH-Wert, Trübheit, sowie Temperatur zum Einsatz.\newline
+Der Arduino und das Dragino-Shield sind in einem witterungsbest\"andig Gehäuse untergebracht. Das Gehäuse besitzt mindestens die Schutzklasse IP65, damit die Komponenten ausreichend gegen Nässe geschützt sind. Die Sensoren sind außerhalb des Gehäuses und durch wasserfeste Kabeldurchführungen verbunden. Die Energieversorgung der Messstation wird über eine externe Stromversorgung sichergestellt.
 
 \begin{figure}[H]
 	\centering
@@ -29,8 +26,7 @@ Stromversorgung sichergestellt.
 \end{figure}
 
 \subsubsection{Datenbankserver}
-Für das Speichern der empfangenen Daten kommt ein MySQL Datenbanksystem zum Einsatz. Hier werden sämtliche von TTN übermittelten Daten abgelegt. Die Daten werden nicht im
-Rohformat gespeichert, sondern soweit aufbereitet, dass nach ihrer Auswertung Metadaten, Messwert und Node strukturiert in der Datenbank liegen.
+Für das Speichern der empfangenen Daten kommt ein MySQL Datenbanksystem zum Einsatz. Hier werden sämtliche von TTN übermittelten Daten abgelegt. Die Daten werden nicht im Rohformat gespeichert, sondern soweit aufbereitet, sodass nach ihrer Auswertung Metadaten, Messwert und Node strukturiert in der Datenbank liegen.
 
 \subsubsection{Datenmodell}
 \begin{figure}[H]
