@@ -15,7 +15,7 @@ ALLE: 3.2
 - Dokumente in Anhänge müssen als PDF zur finalen Version vom Pflichtenheft angehängt werden.
 - Es fehlt noch ein Anhang unter 1.4, ggfs. entfernen, falls wir das Bild nicht haben
 - Kommentare müssen entfernt werden
-- Glossar fehlt noch "VFB", "Node", "HTTP"
+- ~~Glossar fehlt noch "VFB", "Node", "HTTP"~~
 - Sind Veränderungen auf das ER-Modell oder den Anwendungsfall vorhanden, müssen sie jeweils mit [ER-online Tool](https://www.draw.io) und MagicDraw bearbeitet werden.
 
 ----
