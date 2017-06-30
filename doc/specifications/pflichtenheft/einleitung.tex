@@ -60,24 +60,24 @@
 		\endhead
 
 		\hline  %table content
-		LoRaWAN & Ein energiesparendes Funkprotokoll, in Europa im 868MHz-Band. Es ermöglicht Endgeräten das Versenden von Daten über Funk an das Internet, indem die Daten durch Basisstationen aufgefangen und an Netzwerkserver weitergeleitet werden, auf welche über Schnittstellen aus dem Internet heraus zugegriffen werden kann. Auf umgekehrten Wege können auch Daten vom Internet heraus an die Endgeräte gesendet werden. \\
+		LoRaWAN & Ein energiesparendes Funkprotokoll, in Europa im 868MHz-Band. Es ermöglicht Endgeräten das Versenden von Daten über Funk an das Internet, indem die Daten durch Basisstationen aufgefangen und an Netzwerkserver weitergeleitet werden, auf welche über Schnittstellen aus dem Internet heraus zugegriffen werden kann. Auf umgekehrtem Wege können auch Daten vom Internet heraus an die Endgeräte gesendet werden. \\
 		\hline
-		TTN & Ein auf LoRaWAN basierendes freies Netzwerk mit Community-betriebenen Basisstationen und Server. Es ermöglicht das einfache Versenden von Daten mittels LoRaWAN an Computer/Server im Internet. Hierzu leiten die Basisstationen die empfangenen Daten an die TTN-Server weiter, auf welche aus dem Internet aus über Schnittstellen zugegriffen werden kann. \\
+		TTN & Ein auf LoRaWAN basierendes freies Netzwerk mit Community-betriebenen Basisstationen und Server. Es ermöglicht das einfache Versenden von Daten mittels LoRaWAN an Computer/Server im Internet. Hierzu leiten die Basisstationen die empfangenen Daten an die TTN-Server weiter, auf welche aus dem Internet über Schnittstellen zugegriffen werden kann. \\
 		\hline
 		Arduino Uno & Ein Mikrocontroller-Board auf Basis des ATmega328P. Durch seine Energiesparsamkeit, der vielen I/O-Pins, dem ADC (Analog-Digital-Konverter), sowie der Einfachheit der Programmierung eignet er sich gut als Controller für Messstationen, kleineren Steuerungen u.ä. \\
 		\hline
 		Dragino-Shield & Der vollständige Name lautet Dragino LoRa Shield. Dieses Shield für einen Arduino ermöglicht das Funken im 868MHz-Band, welches in der LoRaWAN-Technologie benutzt wird. Es ermöglicht uns das Versenden von Daten über TTN. \\
 		\hline
-		Messstation & Unsere Messstationen bestehen aus Sensoren zur Bestimmung der Wasserqualität, einem Arduino Uno, einem Dragino-Shield sowie einem Gehäuse. Der Arduino Uno ließt regelmäßig die Werte der Sensoren und verschickt sie mit Hilfe des Dragino-Shields über TTN. \\
+		Messstation & Unsere Messstationen bestehen aus Sensoren zur Bestimmung der Wasserqualität, einem Arduino Uno, einem Dragino-Shield sowie einem Gehäuse. Der Arduino Uno liest regelmäßig die Werte der Sensoren und verschickt sie mit Hilfe des Dragino-Shields an TTN. \\
 		\hline
-		Datenbankserver & Ein Server, auf welchem Software läuft, die dafür zuständig ist regelmäßig die Messdaten aus dem TTN zu laden und in eine Datenbank einzulagern. Der Lesezugriff durch Dritte auf die Daten wird ermöglicht. \\
+		Datenbankserver & Ein Server, auf welchem Software läuft, die dafür zuständig ist regelmäßig die Messdaten aus dem TTN zu laden und in eine Datenbank einzulagern. Ein Lesezugriff auf die Daten durch Dritte wird ermöglicht. \\
 		\hline
-		Schutzklasse IP65 & Definiert durch die DIN~EN~60529. Gehäuse entsprechen der Schutzart IP65 wenn sie Staubdicht sind und Schutz gegen Strahlwasser (Düse) aus beliebiger Richtung bieten. \\
+		Schutzklasse IP65 & Definiert durch die DIN~EN~60529. Gehäuse entsprechen der Schutzart IP65 wenn sie staubdicht sind und Schutz gegen Strahlwasser (Düse) aus beliebiger Richtung bieten. \\
 		\hline
 		Node & Ein Node (deutsch: \glqq Knoten\grqq) beschreibt einen Endpunkt in einem
 			   Netzwerk. Im Kontext dieses Dokuments steht er f\"ur eine Messstation. \\
 		\hline
-		Gateway & Eine Empfangstation, welche die von Nodes gesendeten Nachrichten empfängt und über das Internet an die Server von TTN weiterleitet. \\
+		Gateway & Eine Empfangsstation, welche die von Nodes gesendeten Nachrichten empfängt und über das Internet an die Server des TTN weiterleitet. \\
 		\hline
 		PHP & PHP (rekursives Akronym für PHP: Hypertext Preprocessor) ist eine weit
 			  verbreitete und für den allgemeinen Gebrauch bestimmte
@@ -107,11 +107,6 @@
 
 \subsubsection{Projektinitiierung und -zielsetzung}
 
-\begin{itshape}
-	Kurze Darstellung des Projektanlasses und Nennung des Projektziels.
-	Nennung des Auftraggebers etc.
-\end{itshape}
-
 \paragraph{\uline{Anlass}}
 
 Das Projekt \glqq Klare Sicht im Kupfergraben\grqq{} entstand aus der Idee der Technologiestiftung Berlin (TSB) mit Hilfe von Messstationen umweltbezogene Daten im Berliner Stadtgebiet zu sammeln, aufzubereiten, und schließlich als \glqq Open Data\grqq{} zu veröffentlichen und sie somit auch Dritten für weitergehende Analysen und Visualisierungen zugänglich zu machen.
@@ -136,8 +131,6 @@ Folgende Meilensteine wurden f\"ur das Projekt festgelegt.
 
 \subsubsection{Organisation}
 
-\descriptionWhat{ Projektteam \\ Kommunikationszyklen \\ Projektlaufwerk }
-
 Das Projektteam besteht aus den folgenden Studenten der Technischen Informatik an der Beuth Hochschule für Technik Berlin.
 
 \begin{table}[H]
@@ -159,7 +152,7 @@ Das Projektteam besteht aus den folgenden Studenten der Technischen Informatik a
 	\end{tabular}
 \end{table}
 
-Die regelmäßige Kommunikation im Team findet via E-Mail, Messanger App und direkter Besprechung statt. Die Kommunikation mit dem Projektauftragsgeber TSB und dem Kooperationspartner Verein Flussbad Berlin findet via Email und während Treffen kurz vor oder nach Meilensteinen statt.
+Die regelmäßige Kommunikation im Team findet via E-Mail, Messanger App und direkter Besprechung statt. Die Kommunikation mit dem Projektauftraggeber TSB und dem Kooperationspartner Verein Flussbad Berlin findet via Email und während Treffen kurz vor oder nach Meilensteinen statt.
 Als Projektlaufwerk wird Git verwendet.
 
 \subsection{Referenzdokumente}
@@ -173,12 +166,12 @@ LoRa Alliance (\url{http://lora-alliance.org/What-Is-LoRaWAN/LoRaWAN})
 	\item Deutsche Bahn (\url{https://www.technologiestiftung-berlin.de/fileadmin/daten/media/publikationen/vortraege/materialien/1705050_Willner_Vortrag.pdf})
 \end{itemize}
 
-\subsubsection*{Filteranlage des Vereins Flussbad Berlin als unser Messort}
+\subsubsection*{Filteranlage des Vereins Flussbad Berlin (unser Messort)}
 	\item Das Projekt Flussbad (\url{http://www.flussbad-berlin.de/projekt})
 
 \subsubsection*{The Things Network}
 \begin{itemize}[noitemsep]
-	\item Berliner TTN Webseite (\url{https://www.thethingsnetwork.org/community/berlin/})
+	\item Berliner TTN-Community (\url{https://www.thethingsnetwork.org/community/berlin/})
 	\item TTN Mapper (\url{https://ttnmapper.org})
 \end{itemize}
 
