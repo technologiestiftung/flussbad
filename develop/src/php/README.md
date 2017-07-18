@@ -23,16 +23,18 @@ index.php
 
 2. Download Composer
 ```
-curl -sS https://getcomposer.org/installer | /usr/bin/php5.5-cli
+$ curl -sS https://getcomposer.org/installer | /usr/bin/php5.5-cli
 ```
-Use it with `/usr/bin/php5.5-cli path/to/composer.phar`
+Use it with
+```
+$ /usr/bin/php5.5-cli path/to/composer.phar
+```
 
 3. [Install Propel](http://propelorm.org/documentation/01-installation.html#setup)
 4. Build a Propel project [the easy way](http://propelorm.org/documentation/02-buildtime.html#the-easy-way)
 ```
-/usr/bin/php5.5-cli path/to/vendor/bin/propel init
+$ /usr/bin/php5.5-cli path/to/vendor/bin/propel init
 ```
-<aside class="notice">
 In this case we let Propel create our model classes from an exsiting database.
 
 Therefore we additionally need to apply the following steps:
@@ -45,12 +47,15 @@ Therefore we additionally need to apply the following steps:
     }
 }
 ```
-2. Execute `/usr/bin/php5.5-cli path/to/composer.phar dump-autoload`
+2. Execute
+```
+$ /usr/bin/php5.5-cli path/to/composer.phar dump-autoload
+```
 
 For a more detailed explanation see [here](http://propelorm.org/documentation/02-buildtime.html#the-hard-way)
-</aside>
 
 5. Create your `index.php`
+
 ```php
 <?php
 // setup the autoloading
@@ -62,3 +67,65 @@ require_once '/generated-conf/config.php';
 // here goes your code...
 ?>
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
