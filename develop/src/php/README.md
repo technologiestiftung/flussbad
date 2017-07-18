@@ -1,29 +1,16 @@
-# CodeIgniter
+# Example
+
+This example shows the last 10 measured values and some additional information.
+
+The [Medoo Database Framework](https://medoo.in/) is used for this example.
+Its documentation can be found [here](https://medoo.in/doc).
 
 ## Installation
 
-1. Download [CodeIgniter](https://codeigniter.com/) (version >= 3.1.5)
-2. Unzip and upload all files to webspace
-3. Read [CodeIgniter's User Guide](https://www.codeigniter.com/user_guide/)
-
-# Example application
-
-A example application is provided in the `/app` folder. Just upload all
-the files via FTP and apply the following steps.
-
-You need to [configure your database connection](https://www.codeigniter.com/user_guide/database/configuration.html) by editing
-`/app/application/config/database.php` and your base site URL in
-`/app/application/config/config.php`.
-
-In this example the used database table is called 'sensor' and
-looks like this:
+1. Configure your database by editing `index.php`
+2. Upload the the following files via FTP:
 ```
-+-----------+
-| id | name |
-+-----------+
-|  1 |  pH  |
-| .. |  ..  |
-+-----------+
+Medoo.php
+index.php
 ```
-
-So be sure to provide such a table to make the example work.
+3. Open your browser and type in the address pointing to your `index.php`
