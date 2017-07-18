@@ -32,28 +32,30 @@ $ /usr/bin/php5.5-cli path/to/composer.phar
 
 3. [Install Propel](http://propelorm.org/documentation/01-installation.html#setup)
 4. Build a Propel project [the easy way](http://propelorm.org/documentation/02-buildtime.html#the-easy-way)
+
 ```
 $ /usr/bin/php5.5-cli path/to/vendor/bin/propel init
 ```
 In this case we let Propel create our model classes from an exsiting database.
 
 Therefore we additionally need to apply the following steps:
-1. Add the following to `composer.json`
+  1. Add the following to `composer.json`
 
-```
-{
-  ...
-    "autoload": {
-      "classmap": ["path/to/generated/models/folder/"]
-    }
-}
-```
-2. Execute
-```
-$ /usr/bin/php5.5-cli path/to/composer.phar dump-autoload
-```
+  ```
+  {
+    ...
+      "autoload": {
+        "classmap": ["path/to/generated/models/folder/"]
+      }
+  }
+  ```
+  2. Execute
 
-For a more detailed explanation see [here](http://propelorm.org/documentation/02-buildtime.html#the-hard-way)
+  ```
+  $ /usr/bin/php5.5-cli path/to/composer.phar dump-autoload
+  ```
+
+  For a more detailed explanation see [here](http://propelorm.org/documentation/02-buildtime.html#the-hard-way)
 
 5. Create your `index.php`
 
