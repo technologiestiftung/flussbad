@@ -3,13 +3,13 @@
 #define DATASIZE DATASIZE_PRTCL + DATASIZE_FLOAT + DATASIZE_FLOAT
 
 #define DATASIZE_PRTCL  1    //1 Byte protocolversion
-#define DATASIZE_FLOAT  5    //1 Byte sensortype, 4 Bytes float
-#define DATASIZE_DOUBLE 9    //1 Byte sensortype, 8 Bytes float
-#define DATASIZE_INT    5    //1 Byte sensortype, 4 Bytes int
+#define DATASIZE_FLOAT  7    //2 Byte sensortype, 4 Bytes float
+#define DATASIZE_DOUBLE 10   //2 Byte sensortype, 8 Bytes float
+#define DATASIZE_INT    7    //2 Byte sensortype, 4 Bytes int
 
-#define PRTCL_VERSION 0x01;
-#define PRTCL_TEMP    0x03;
-#define PRTCL_TURB    0x05;
+#define PRTCL_VERSION 0x01
+#define PRTCL_TEMP    0x0003
+#define PRTCL_TURB    0x0005
 
 #ifdef SERIAL_DEBUG_ENABLED 
   #define DebugPrint(...) Serial.print(__VA_ARGS__)
@@ -111,10 +111,12 @@ void build_msg()
     turb = read_turb();
 
     mydata[0] = PRTCL_VERSION;
-    mydata[1] = PRTCL_TEMP;
-    FtoLE(temp, &mydata[2]);
-    mydata[6] = PRTCL_TURB;    
-    FtoLE(temp, &mydata[7]);
+    mydata[1] = (PRTCL_TEMP & 0xFF);
+    mydata[2] = (PRTCL_TEMP >> 8);
+    FtoLE(temp, &mydata[3]);
+    mydata[7] = (PRTCL_TURB & 0xFF);
+    mydata[8] = (PRTCL_TURB >> 8);
+    FtoLE(temp, &mydata[9]);
 
     DebugPrintln("build msg");
 }
