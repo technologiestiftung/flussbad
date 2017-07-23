@@ -70,7 +70,7 @@ const lmic_pinmap lmic_pins = {
     .nss = 10,
     .rxtx = LMIC_UNUSED_PIN,
     .rst = 9,
-    .dio = {2, 6, 7},
+    .dio = {2, 6, 7}, //refer to DIO0, DIO1 and DIO2 respectively.
 };
 
 void onEvent (ev_t ev) {
