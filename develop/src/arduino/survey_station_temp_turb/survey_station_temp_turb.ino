@@ -8,8 +8,8 @@
 #define DATASIZE_INT    7    //2 Byte sensortype, 4 Bytes int
 
 #define PRTCL_VERSION 0x01
-#define PRTCL_TEMP    0x0003
-#define PRTCL_TURB    0x0005
+#define PRTCL_TEMP    0x0001
+#define PRTCL_TURB    0x0007
 
 #ifdef SERIAL_DEBUG_ENABLED 
   #define DebugPrint(...) Serial.print(__VA_ARGS__)
@@ -23,7 +23,7 @@
 //**        inlcudes                                                                **
 //************************************************************************************
 
-//includes for LoRaWAN
+//includes for LoRaWAN0
 #include <lmic.h>
 #include <hal/hal.h>
 #include <SPI.h>
@@ -175,7 +175,7 @@ float read_temp(void)
   while(!temp_sensors.available());
   
   // Reads the temperature from sensor
-  return temp_sensors.readTemperature(temp_sensor_adress);
+  return temp_sensors.readTemperature(temp_sensor_adress) + 273.15;  //°C to K
 }
 
 
