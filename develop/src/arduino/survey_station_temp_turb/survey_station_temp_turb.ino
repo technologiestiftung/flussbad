@@ -251,7 +251,7 @@ void do_send(osjob_t* j){
     build_msg();
 
     #if(SERIAL_DEBUG_ENABLED == 1) 
-    //DebugPrint(F("mydata: "));
+    DebugPrint(F("mydata: "));
     for( i = 0; i < sizeof(mydata); i++) {
       DebugPrint( (char)mydata[i]);
     }
