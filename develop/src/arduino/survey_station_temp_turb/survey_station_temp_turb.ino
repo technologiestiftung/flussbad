@@ -1,4 +1,4 @@
-#define SERIAL_DEBUG_ENABLED 1
+#define SERIAL_DEBUG_ENABLED 1    // 1 for serial debug informations
 
 #define DATASIZE DATASIZE_PRTCL + DATASIZE_FLOAT + DATASIZE_FLOAT
 
@@ -87,11 +87,9 @@ uint8_t mydata[DATASIZE];
 
 void setup() {
   Serial.begin(9600);
-  DebugPrintln("setup start");
   setup_temperature();
   setup_turbidity();
   setup_lorawan();
-  DebugPrintln("setup end");
 }
 
 void loop() {
@@ -117,8 +115,6 @@ void build_msg()
     mydata[7] = (PRTCL_TURB & 0xFF);
     mydata[8] = (PRTCL_TURB >> 8);
     FtoLE(temp, &mydata[9]);
-
-    DebugPrintln("build msg");
 }
 
 //************************************************************************************
@@ -130,26 +126,15 @@ void setup_temperature()
   // search DS18B20 sensorAdress
   while(onewire.search(temp_sensor_adress))
   {
-    DebugPrintln("next");
     if (temp_sensor_adress[0] != 0x28)
       continue;
       
     if (OneWire::crc8(temp_sensor_adress, 7) != temp_sensor_adress[7])
     {
-      DebugPrintln(F("1-Wire bus connection error!"));
+    	DebugPrintln(F("1-W err"));
+      //DebugPrintln(F("1-Wire bus connection error!"));
       break;
     }
-
-    //print found adress
-    for (byte i=0; i<8; i++)
-    {
-      DebugPrint(F("0x"));
-      DebugPrint(temp_sensor_adress[i], HEX);
-      
-      if (i < 7)
-        DebugPrint(F(", "));
-    }
-    DebugPrintln();
   }
   
   // DS18B20 sensors setup
@@ -195,39 +180,36 @@ void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
 void onEvent (ev_t ev) {
-    DebugPrint("time[");
-    DebugPrint(os_getTime());
-    DebugPrint("]: ");
     switch(ev) {
         case EV_SCAN_TIMEOUT:
-            DebugPrintln(F("EV_SCAN_TIMEOUT"));
+            DebugPrintln(F("SCAN_TIMEOUT"));
             break;
         case EV_BEACON_FOUND:
-            DebugPrintln(F("EV_BEACON_FOUND"));
+            DebugPrintln(F("BEACON_FOUND"));
             break;
         case EV_BEACON_MISSED:
-            DebugPrintln(F("EV_BEACON_MISSED"));
+            DebugPrintln(F("BEACON_MISSED"));
             break;
         case EV_BEACON_TRACKED:
-            DebugPrintln(F("EV_BEACON_TRACKED"));
+            DebugPrintln(F("BEACON_TRACKED"));
             break;
         case EV_JOINING:
-            DebugPrintln(F("EV_JOINING"));
+            DebugPrintln(F("JOINING"));
             break;
         case EV_JOINED:
-            DebugPrintln(F("EV_JOINED"));
+            DebugPrintln(F("JOINED"));
             break;
         case EV_RFU1:
-            DebugPrintln(F("EV_RFU1"));
+            DebugPrintln(F("RFU1"));
             break;
         case EV_JOIN_FAILED:
-            DebugPrintln(F("EV_JOIN_FAILED"));
+            DebugPrintln(F("JOIN_FAILED"));
             break;
         case EV_REJOIN_FAILED:
-            DebugPrintln(F("EV_REJOIN_FAILED"));
+            DebugPrintln(F("REJOIN_FAILED"));
             break;
         case EV_TXCOMPLETE:
-            DebugPrintln(F("EV_TXCOMPLETE (includes waiting for RX windows)"));
+            DebugPrintln(F("TXCOMPLETE (includes waiting for RX windows)"));
             if(LMIC.dataLen) {
                 // data received in rx slot after tx
                 DebugPrint(F("Data Received: "));
@@ -238,20 +220,20 @@ void onEvent (ev_t ev) {
             os_setTimedCallback(&sendjob, os_getTime()+sec2osticks(TX_INTERVAL), do_send);
             break;
         case EV_LOST_TSYNC:
-            DebugPrintln(F("EV_LOST_TSYNC"));
+            DebugPrintln(F("LOST_TSYNC"));
             break;
         case EV_RESET:
-            DebugPrintln(F("EV_RESET"));
+            DebugPrintln(F("RESET"));
             break;
         case EV_RXCOMPLETE:
             // data received in ping slot
-            DebugPrintln(F("EV_RXCOMPLETE"));
+            DebugPrintln(F("RXCOMPLETE"));
             break;
         case EV_LINK_DEAD:
-            DebugPrintln(F("EV_LINK_DEAD"));
+            DebugPrintln(F("LINK_DEAD"));
             break;
         case EV_LINK_ALIVE:
-            DebugPrintln(F("EV_LINK_ALIVE"));
+            DebugPrintln(F("LINK_ALIVE"));
             break;
          default:
             DebugPrintln(F("Unknown event"));
@@ -266,21 +248,20 @@ void do_send(osjob_t* j){
     DebugPrintln(F("OP_TXRXPEND, not sending"));
   } else {
     // Prepare upstream data transmission at the next possible time.
-      build_msg();
+    build_msg();
 
-    #if(DebugPrint == 1) 
-    DebugPrint("mydata: ");
+    #if(SERIAL_DEBUG_ENABLED == 1) 
+    //DebugPrint(F("mydata: "));
     for( i = 0; i < sizeof(mydata); i++) {
       DebugPrint( (char)mydata[i]);
     }
-    DebugPrint("\n");
+    DebugPrintln();
     #endif
 
     //LMIC_setTxData2(1, (char*) &cnter, sizeof(cnter), 0);
     LMIC_setTxData2(1, mydata, sizeof(mydata)-1, 0);
-    DebugPrintln(F("Packet queued"));
-    DebugPrint("LMIC.freg: ");
-    DebugPrintln(LMIC.freq);
+    //DebugPrint("Packet queued\nLMIC.freg: ");
+    //DebugPrintln(LMIC.freq);
   }
   // Next TX is scheduled after TX_COMPLETE event.
 }
