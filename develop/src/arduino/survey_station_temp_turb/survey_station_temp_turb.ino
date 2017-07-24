@@ -253,7 +253,7 @@ void do_send(osjob_t* j){
     #if(SERIAL_DEBUG_ENABLED == 1) 
     DebugPrint(F("mydata: "));
     for( i = 0; i < sizeof(mydata); i++) {
-      DebugPrint( (char)mydata[i]);
+      DebugPrint(mydata[i], HEX);
     }
     DebugPrintln();
     #endif
