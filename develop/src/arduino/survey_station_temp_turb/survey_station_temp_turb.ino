@@ -254,6 +254,7 @@ void do_send(osjob_t* j){
     DebugPrint(F("mydata: "));
     for( i = 0; i < sizeof(mydata); i++) {
       DebugPrint(mydata[i], HEX);
+      DebugPrint(" ");
     }
     DebugPrintln();
     #endif
