@@ -1107,7 +1107,7 @@ class Medoo
 			{
 				if (strpos($key, '#') === 0)
 				{
-					$values[] = $this->fnQuote($key, $data[ $key ]);	
+					$values[] = $this->fnQuote($key, $data[ $key ]);
 					continue;
 				}
 

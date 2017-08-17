@@ -1,5 +1,8 @@
 <?php
 
+require_once('./debug_helper.php');
+
+
 define('ROOT_DIR', dirname(__FILE__).'/');
 require_once('autoloader.php');
 /*
@@ -9,35 +12,26 @@ require_once('./db.class.php');
 require_once('./config.php');
 $db_init = DB::getInstance($config['database']);
 
-/*
 
-$str = "\x01\x01\x00\x33\x73\x95\x43\x07\x00\x33\x73\x95\x43\x00";
-$payload = base64_encode($str);
+//tests::validateTime();
+//tests::Airprotocol();
+//tests::ArrayBuildingForDBInsert();
+//tests::TTNData();
+//tests::testIntegerClass();
+tests::SensorTests();
 
 try {
-$air = new Airprotocol($payload);
-} catch (Exception $e) {}
-dumpVar($air,'$air');
-$sens = $air->getSensors();
-dumpVar($sens,'<b>$sens</b>');
-*/
-
-/*
-	.....
-	ttn integration 
-	prof if post
-	get json string from post
-	.....
-*/
-try {
-$ttnjsondata = '{"app_id":"1312-test-app","dev_id":"1312-dev01","hardware_serial":"00CE1969FB0261DA","port":1,"counter":109,"payload_raw":"cG9zMDAx","metadata":{"time":"2017-06-24T16:28:37.407564219Z","frequency":868.3,"modulation":"LORA","data_rate":"SF12BW125","coding_rate":"4/5","gateways":[{"gtw_id":"eui-1dee16aa26f490d7","timestamp":3398235572,"time":"","channel":1,"rssi":-120,"snr":-15.5,"rf_chain":1,"latitude":52.507317,"longitude":13.328554,"altitude":15}]},"downlink_url":"https://integrations.thethingsnetwork.org/ttn-eu/api/v2/down/1312-test-app/test?key=ttn-account-v2.VGfb9393iQkfRFzf5WTC5yQbpbLcT2TBd1YO2JfHCr4"}';
+//$ttnjsondata = '{"app_id":"1312-test-app","dev_id":"1312-dev01","hardware_serial":"00CE1969FB0261DA","port":1,"counter":109,"payload_raw":"AQEAM3OVQwcAM3OVQwA=","metadata":{"time":"2017-06-24T16:28:37.407564219Z","frequency":868.3,"modulation":"LORA","data_rate":"SF12BW125","coding_rate":"4/5","gateways":[{"gtw_id":"eui-1dee16aa26f490d7","timestamp":3398235572,"time":"","channel":1,"rssi":-120,"snr":-15.5,"rf_chain":1,"latitude":52.507317,"longitude":13.328554,"altitude":15}]},"downlink_url":"https://integrations.thethingsnetwork.org/ttn-eu/api/v2/down/1312-test-app/test?key=ttn-account-v2.VGfb9393iQkfRFzf5WTC5yQbpbLcT2TBd1YO2JfHCr4"}';
+$ttnjsondata = '{"app_id":"1312-test-app","dev_id":"1312-dev01","hardware_serial":"00CE1969FB0261DA","port":1,"counter":109,"payload_raw":"AQEAM3OVQwcAM3OVQwA=","metadata":{"time":"2017-06-24T16:28:37.407564219Z","frequency":868.3,"modulation":"LORA","data_rate":"SF12BW125","coding_rate":"4/5","gateways":[{"gtw_id":"eui-1dee16aa26f490d7","timestamp":3398235572,"time":"","channel":1,"rssi":-120,"snr":-15.4,"rf_chain":1,"latitude":52.507317,"longitude":13.328554,"altitude":15},{"gtw_id":"eui-1dee32af26a59c31","timestamp":1234933943,"time":"","channel":2,"rssi":-90,"snr":-19.6,"rf_chain":1,"latitude":52.502341,"longitude":13.328294,"altitude":95}]},"downlink_url":"https://integrations.thethingsnetwork.org/ttn-eu/api/v2/down/1312-test-app/test?key=ttn-account-v2.VGfb9393iQkfRFzf5WTC5yQbpbLcT2TBd1YO2JfHCr4"}';
 $ttinteg = new TTNIntegration($ttnjsondata);
 
 //$ttndata = new TTNData($ttnjsondata);
 } catch ( Exception $e ) {
 	echo $e;
 }
-//	
+
+exit();
+//
 
 /*
 $db = new ttn_db_mapper(
@@ -56,21 +50,6 @@ $db->addNewApplication('testApp_id');
 
 exit();
 dumpVar( $db->mysqli(), 'db->mysqli()', '#5ee3c2' );
-
-function dumpVar( $var, $name, $color = null ) {
-	
-	$style="style='background-color:#3d83ef;'";
-	if ( !is_null( $color ) ) {
-		$style="style='background-color:" . $color . ';\'';
-	}
-	echo("<div $style>");
-	echo('<p style=\'border-bottom: 3px solid black;\'>' . $name . ': </p>');
-	echo('<pre style=\'margin-left: 2em;\'>');
-	var_dump( $var );
-	echo('</pre>');
-	echo('</div>');
-
-}
 
 if (!function_exists('getallheaders')) {
 	function getallheaders() {
@@ -129,7 +108,7 @@ function get_client_ip2() {
 }
 
 class TTN_Data {
-	
+
 	private $json = "";
 	private $data = "";
 
@@ -143,8 +122,8 @@ class TTN_Data {
 		$this->write();
 		$this->data = 'get_client_ip2: ' . get_client_ip2();
 		$this->write();
-		
-		
+
+
 		$this->data = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 		$this->write();
 //		$this->data = gethostbyaddr($_SERVER['REMOTE_HOST']);
@@ -154,7 +133,7 @@ class TTN_Data {
 		$this->data = gethostbyaddr(get_client_ip2());
 		$this->write();
 
-		
+
 //		echo "test #1\n";
 		//Make sure that it is a POST request.
 		if(strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') != 0){
@@ -187,11 +166,11 @@ class TTN_Data {
 		$this->json = $decoded;
 //		echo "data: " . $this->data . "\n";
 //		echo "json: " . $this->json . "\n";
-		
+
 		$this->write();
 
 	}
-	
+
 	public function parse2() {
 
 		$headers = '';
@@ -214,11 +193,11 @@ class TTN_Data {
 		}
 
 		$this->data = $request_data;
-		
+
 		$this->write();
 
 	}
-	
+
 	private function write() {
 //		echo "test #a\n";
 		if (isset($this->data)) {
@@ -228,7 +207,7 @@ class TTN_Data {
 				foreach ( $this->data as $name => $value) {
 			//		echo "$name: $value\n";
 					$data .= "$name: $value\n";
-					
+
 					$data .= $this->json;
 				}
 			} else {
@@ -246,7 +225,7 @@ class TTN_Data {
 			file_put_contents($file, $content, FILE_APPEND | LOCK_EX);
 
 		}
-		
+
 	}
 }
 

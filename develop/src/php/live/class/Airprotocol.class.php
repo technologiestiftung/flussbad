@@ -6,49 +6,51 @@ use Medoo\Medoo;
  * Parse the payload of the node
  */
 class Airprotocol {
-	private $payload;
-	private $raw;
-	private $sensor_count;
-	private $sensors;
-	private $version;
+	private $payload;		/** base64_encoded payload */
+	private $raw;			/** decoded payload */
+	private $sensor_count;	/** number of sonsors */
+	private $sensors;		/** all sensors with values */
+	private $version;		/** protocol version */
 
 	/**
-	 * 
+	 * Constructor
 	 */
 	public  function __construct($data = null) {
-		
-		if ( !is_null($data) ) {
-			
-			$this->sensor_count = 0;
 
-			if ( is_string($data) ) {				
-				$this->payload = $data;
-				$this->raw = base64_decode($this->payload);
-
-				$res = unpack('C',$this->raw[0]);
-				$version = $res[1];
-				
-				switch( (int)$version ) {
-					case 0:
-						break;
-					case 1:
-						$this->version = $version;
-						$this->version01();
-						break;
-					default:
-						break;
-				}
-			}
-
-		} else {
-			throw Exception;
+		if ( is_null($data) ) {
+			throw new InvalidArgumentException('');
 		}
+
+		if ( !is_string($data) ) {
+			throw new Exception('Argument must be a base64 encoded string');
+		}
+
+		// init the sensor counter
+		$this->sensor_count = 0;
+
+		$this->payload = $data;
+		$this->raw = base64_decode($this->payload);
+
+		$res = unpack('C',$this->raw[0]);
+		$version = $res[1];
+
+		switch( (int)$version ) {
+			case 0:
+				break;
+			case 1:
+				$this->version = $version;
+				$this->version01();
+				break;
+			default:
+				throw new Exception('invalid protocol');
+		}
+
 	}
 
 	public function __destruct() {
 
 	}
-	
+
 	/**
 	 * Parse the protocol version 01
 	 */
@@ -71,10 +73,10 @@ class Airprotocol {
 
 				// get infos about the sensor
 				$sensor_type = $this->getSensorType($sensor_id);
-				
+
 				$offset += $sensorTypeLength;
 				if ( $offset > $len ) {
-					throw new Exception('incompliete data'); // sensor id is set but no value 
+					throw new Exception('incompliete data'); // sensor id is set but no value
 				}
 
 				$sensor_value = substr($this->raw,$offset,$sensor_type[0]['datalength']);
@@ -93,21 +95,20 @@ class Airprotocol {
 			$this->sensors = $data;
 		}
 	}
-	
+
 	/**
 	 * Get the senser type from database
 	 */
 	private function getSensorType($sensor_id) {
-		
+
 		if ( is_null($sensor_id) && !is_int($sensor_id) ) {
 			throw new InvalidArgumentException('getSensorType method only accepts integers');
 		}
-		
+
 		$db = DB::getInstance();
 
-		// get the 
+		// get the data type of the sensor
 		$sensor = $db->select('v_sensor_type', ['id','datalength','data_type'], [ 'id' => $sensor_id ] );
-
 		if ( !is_null($sensor) && 0 < sizeof($sensor) ) {
 			return $sensor;
 		} else {
