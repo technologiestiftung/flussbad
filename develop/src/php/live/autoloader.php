@@ -12,18 +12,22 @@ spl_autoload_register(function($className) {
 	if ( is_file($root) ) {
 		dumpVar($root,'autoloader: $class');
 		require_once($root);
+		return;
 	} else if ( is_file($class) ) {
 		dumpVar($class,'autoloader: $class');
 		require_once($class);
+		return;
 	}
 
 	$tests=ROOT_DIR . "tests/{$className}.class.php";
 	if ( is_file($tests) ) {
 		dumpVar($tests,'autoloader: $class');
 		require_once($tests);
+		return;
 	} else if ( is_file($class) ) {
 		dumpVar($class,'autoloader: $class');
 		require_once($class);
+		return;
 	}
 
 	//include_once($class);
