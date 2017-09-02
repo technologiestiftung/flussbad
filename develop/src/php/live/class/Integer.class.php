@@ -46,7 +46,7 @@ class Integer {
 	 *
 	 * @return 8 bit signed integer
 	 */
-	public static function sInt8($int) {
+	public static function sInt8($int = null) {
 		self::checkParam($int);
 		return unpack('c',$int)[1];
 	}
@@ -58,7 +58,7 @@ class Integer {
 	 *
 	 * @return 8 bit unsigned integer
 	 */
-	public static function uInt8($int) {
+	public static function uInt8($int = null) {
 		self::checkParam($int);
 		return unpack('C',$int)[1];
 	}
@@ -71,7 +71,7 @@ class Integer {
 	 *
 	 * @return 16 bit signed integer
 	 */
-	public static function sInt16($int, Order $order) {
+	public static function sInt16($int = null, Order $order) {
 		self::checkParam($int);
 
 		self::endianTest();
@@ -91,7 +91,7 @@ class Integer {
 	 *
 	 * @return 16 bit unsigned integer
 	 */
-	public static function uInt16($int, Order $order) {
+	public static function uInt16($int = null, Order $order) {
 		self::checkParam($int);
 
 		self::endianTest();
@@ -113,7 +113,7 @@ class Integer {
 	 *
 	 * @return 32 bit signed integer
 	 */
-	public static function sInt32($int, Order $order) {
+	public static function sInt32($int = null, Order $order) {
 		self::checkParam($int);
 
 		self::endianTest();
@@ -133,7 +133,7 @@ class Integer {
 	 *
 	 * @return 32 bit unsigned integer
 	 */
-	public static function uInt32($int, Order $order) {
+	public static function uInt32($int = null, Order $order) {
 		self::checkParam($int);
 
 		if ( Order::BIG_ENDIAN() == $order->getValue() ) {
@@ -153,7 +153,7 @@ class Integer {
 	 *
 	 * @return 64 bit signed integer
 	 */
-	public static function sInt64($int, Order $order) {
+	public static function sInt64($int = null, Order $order) {
 		self::checkParam($int);
 
 		self::endianTest();
@@ -173,7 +173,7 @@ class Integer {
 	 *
 	 * @return 64 bit unsigned integer
 	 */
-	public static function uInt64($int, Order $order) {
+	public static function uInt64($int = null, Order $order) {
 		self::checkParam($int);
 
 		if ( Order::BIG_ENDIAN() == $order->getValue() ) {
