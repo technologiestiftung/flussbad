@@ -34,8 +34,7 @@ class Airprotocol {
 		$this->payload = $data;
 		$this->raw = base64_decode($this->payload);
 
-		$res = unpack('C',$this->raw[0]);
-		$version = $res[1];
+		$version = Integer::uInt8($this->raw[0]);
 
 		switch( (int)$version ) {
 			case 0:
@@ -47,10 +46,6 @@ class Airprotocol {
 			default:
 				throw new Exception('invalid protocol');
 		}
-
-	}
-
-	public function __destruct() {
 
 	}
 
