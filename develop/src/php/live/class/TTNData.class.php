@@ -6,6 +6,15 @@ class TTNData {
 	private $json;
 	private $data;
 
+	/**
+	 * Constructor
+	 *
+	 * Constructor signatures\n
+	 * use <b>TTNData( string json )</b>\n
+	 *
+	 * @throws InvalidArgumentException
+	 * @throws Exception
+	 */
 	function __construct($json = null) {
 
 		if ( is_null($json) ) {

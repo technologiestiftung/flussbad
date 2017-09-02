@@ -3,17 +3,20 @@
 use Medoo\Medoo;
 
 /**
- * Parse the payload of the node
+ * Parse the payload of the Node
  */
 class Airprotocol {
-	private $payload;		/** base64_encoded payload */
-	private $raw;			/** decoded payload */
-	private $sensor_count;	/** number of sonsors */
-	private $sensors;		/** all sensors with values */
-	private $version;		/** protocol version */
+	private $payload;		/**< base64_encoded payload */
+	private $raw;			/**< decoded payload */
+	private $sensor_count;		/**< number of sonsors */
+	private $sensors;		/**< all sensors with values */
+	private $version;		/**< protocol version */
 
 	/**
 	 * Constructor
+	 *
+	 * @throws InvalidArgumentException
+	 * @throws Exception
 	 */
 	public  function __construct($data = null) {
 
@@ -52,7 +55,7 @@ class Airprotocol {
 	}
 
 	/**
-	 * Parse the protocol version 01
+	 * Parse the protocol version-01
 	 */
 	private function version01() {
 		$sensorTypeLength = 2;

@@ -498,7 +498,7 @@ try {
 
 
 } catch (Exception $e) {
-		$this->db->pdo->rollBack();
+	dumpVar($e, 'exception');
 }
 		$this->db->pdo->rollBack();
 		//$this->db->pdo->commit();

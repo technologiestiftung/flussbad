@@ -5,8 +5,12 @@
  */
 class Integer {
 
+	/** byte order of the machine  */
 	private static $machineByteOrder = null;
 
+	/**
+	 * check if the argument is valid
+	 */
 	private static function checkParam($param) {
 		if ( null === $param || !isset($param) || !is_string($param) ) {
 			throw new InvalidArgumentException('');
@@ -35,8 +39,12 @@ class Integer {
 		}
 	}
 
-	/*
+	/**
 	 * Cast the parameter to 8 bit singed integer
+	 *
+	 * @param[in] string|int $int
+	 *
+	 * @return 8 bit signed integer
 	 */
 	public static function sInt8($int) {
 		self::checkParam($int);
@@ -45,6 +53,10 @@ class Integer {
 
 	/**
 	 * Cast the parameter to 8 bit unsigned integer
+	 *
+	 * @param[in] string|int $int
+	 *
+	 * @return 8 bit unsigned integer
 	 */
 	public static function uInt8($int) {
 		self::checkParam($int);
@@ -53,6 +65,11 @@ class Integer {
 
 	/**
 	 * Cast the parameter to 16 bit signed integer
+	 *
+	 * @param[in] string|int $int
+	 * @param[in] Order $order
+	 *
+	 * @return 16 bit signed integer
 	 */
 	public static function sInt16($int, Order $order) {
 		self::checkParam($int);
@@ -68,6 +85,11 @@ class Integer {
 
 	/**
 	 * Cast the parameter to 16 bit unsigned integer
+	 *
+	 * @param[in] string|int $int
+	 * @param[in] Order $order
+	 *
+	 * @return 16 bit unsigned integer
 	 */
 	public static function uInt16($int, Order $order) {
 		self::checkParam($int);
@@ -85,6 +107,11 @@ class Integer {
 
 	/**
 	 * Cast the parameter to 32 bit signed integer
+	 *
+	 * @param[in] string|int $int
+	 * @param[in] Order $order
+	 *
+	 * @return 32 bit signed integer
 	 */
 	public static function sInt32($int, Order $order) {
 		self::checkParam($int);
@@ -100,6 +127,11 @@ class Integer {
 
 	/**
 	 * Cast the parameter to 32 bit unsigned integer
+	 *
+	 * @param[in] string|int $int
+	 * @param[in] Order $order
+	 *
+	 * @return 32 bit unsigned integer
 	 */
 	public static function uInt32($int, Order $order) {
 		self::checkParam($int);
@@ -115,6 +147,11 @@ class Integer {
 
 	/**
 	 * Cast the parameter to 64 bit signed integer
+	 *
+	 * @param[in] string|int $int
+	 * @param[in] Order $order
+	 *
+	 * @return 64 bit signed integer
 	 */
 	public static function sInt64($int, Order $order) {
 		self::checkParam($int);
@@ -130,6 +167,11 @@ class Integer {
 
 	/**
 	 * Cast the parameter to 64 bit unsigned integer
+	 *
+	 * @param[in] string|int $int
+	 * @param[in] Order $order
+	 *
+	 * @return 64 bit unsigned integer
 	 */
 	public static function uInt64($int, Order $order) {
 		self::checkParam($int);
