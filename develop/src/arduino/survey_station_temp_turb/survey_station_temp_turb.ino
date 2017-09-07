@@ -1,22 +1,22 @@
-#define SERIAL_DEBUG_ENABLED 1    // 1 for serial debug informations
+#define SERIAL_DEBUG_ENABLED 1    //<  1 for serial debug informations
 
 #define DATASIZE DATASIZE_PRTCL + DATASIZE_FLOAT + DATASIZE_FLOAT
 
-#define DATASIZE_PRTCL  1    //1 Byte protocolversion
-#define DATASIZE_FLOAT  7    //2 Byte sensortype, 4 Bytes float
-#define DATASIZE_DOUBLE 10   //2 Byte sensortype, 8 Bytes float
-#define DATASIZE_INT    7    //2 Byte sensortype, 4 Bytes int
+#define DATASIZE_PRTCL  1    //< 1 Byte protocolversion
+#define DATASIZE_FLOAT  7    //< 2 Byte sensortype, 4 Bytes float
+#define DATASIZE_DOUBLE 10   //< 2 Byte sensortype, 8 Bytes float
+#define DATASIZE_INT    7    //< 2 Byte sensortype, 4 Bytes int
 
-#define PRTCL_VERSION 0x01
-#define PRTCL_TEMP    0x0001
-#define PRTCL_TURB    0x0007
+#define PRTCL_VERSION 0x01   ///< protocolversion 1
+#define PRTCL_TEMP    0x0001 ///< id of temperature is 1
+#define PRTCL_TURB    0x0007 ///< id of turbidity is 7
 
 #ifdef SERIAL_DEBUG_ENABLED 
-  #define DebugPrint(...) Serial.print(__VA_ARGS__)
-  #define DebugPrintln(...) Serial.println(__VA_ARGS__)
+  #define DebugPrint(...) Serial.print(__VA_ARGS__)		///< Debug output
+  #define DebugPrintln(...) Serial.println(__VA_ARGS__)	///< Debug output
 #else
-  #define DebugPrint(...)
-  #define DebugPrintln(...)  
+  #define DebugPrint(...)	///< Debug output
+  #define DebugPrintln(...)	///< Debug output
 #endif
 
 //************************************************************************************
@@ -40,26 +40,36 @@
 
 
 //globales for TTN
-// LoRaWAN NwkSKey, network session key
-// This is the default Semtech key, which is used by the prototype TTN
-// network initially.
+/**
+ *LoRaWAN NwkSKey, network session key
+ * This is the default Semtech key, which is used by the prototype TTN
+ * network initially.
+ */
 static const PROGMEM u1_t NWKSKEY[16] = { 0x65, 0xCF, 0xBC, 0xBA, 0xEA, 0x70, 0xFB, 0x03, 0xD9, 0x8B, 0x92, 0xEB, 0x3B, 0x9D, 0xED, 0xAB };
 //{ 0xAB, 0xED, 0x9D, 0x3B, 0xEB, 0x92, 0x8B, 0xD9, 0x03, 0xFB, 0x70, 0xEA, 0xBA, 0xBC, 0xCF, 0x65 };
 
-// LoRaWAN AppSKey, application session key
-// This is the default Semtech key, which is used by the prototype TTN
-// network initially.
+/**
+ * LoRaWAN AppSKey, application session key
+ * This is the default Semtech key, which is used by the prototype TTN
+ * network initially.
+ */
 static const u1_t PROGMEM APPSKEY[16] = { 0x90, 0xF1, 0x50, 0xBB, 0x7F, 0x62, 0x5C, 0xF5, 0x61, 0x14, 0xE5, 0xBA, 0x1F, 0xC0, 0x0A, 0x1F };
 //{ 0x1F, 0x0A, 0xC0, 0x1F, 0xBA, 0xE5, 0x14, 0x61, 0xF5, 0x5C, 0x62, 0x7F, 0xBB, 0x50, 0xF1, 0x90 };
 
-// LoRaWAN end-device address (DevAddr)
-// See http://thethingsnetwork.org/wiki/AddressSpace
+/**
+ * LoRaWAN end-device address (DevAddr)
+ * See http://thethingsnetwork.org/wiki/AddressSpace
+ */
 static const u4_t DEVADDR = 0x26011EB9; // <-- Change this address for every node!
 
 //globals for temperature
+/**Data-pin of temperature-sensor*/
 const byte ONEWIRE_PIN = 3;
+/**ONEWIRE-address of temperature-sensor*/
 byte temp_sensor_adress[8];
+/**OneWire-obj of temperature-sensor*/
 OneWire onewire(ONEWIRE_PIN);
+/**DS18B20-obj of temperature-sensor*/
 DS18B20 temp_sensors(&onewire);
 
 //globals for turbidity
@@ -67,11 +77,13 @@ byte turb_sensor_adress = A0;
 
 static osjob_t sendjob;
 
-// Schedule TX every this many seconds (might become longer due to duty
-// cycle limitations).
+/**
+ * Schedule TX every this many seconds (might become longer due to duty
+ * cycle limitations).
+ */
 const unsigned TX_INTERVAL = 30;
 
-// Pin mapping
+/** Pin mapping */
 const lmic_pinmap lmic_pins = {
     .nss = 10,
     .rxtx = LMIC_UNUSED_PIN,
@@ -79,12 +91,17 @@ const lmic_pinmap lmic_pins = {
     .dio = {2, 6, 7},
 };
 
+/**Data-buffer*/
 uint8_t mydata[DATASIZE];
 
 //************************************************************************************
 //**        setup & loop                                                            **
 //************************************************************************************
 
+/**
+ * @brief	Function called on startup. Initiates all sensors etc. 
+ * @info	Add further setup-calls for additional hardware here.
+ */
 void setup() {
   Serial.begin(9600);
   setup_temperature();
@@ -92,6 +109,9 @@ void setup() {
   setup_lorawan();
 }
 
+/**
+ * @brief Main pogram loop
+ */
 void loop() {
     os_runloop_once();
 }
@@ -101,6 +121,11 @@ void loop() {
 //**        read sensors & build msg                                                **
 //************************************************************************************
 
+/**
+ * @brief	Function to create the outgoing message
+ * @details	Gets the temperature and turbidity-values by calling read_temp() and read_turb
+ * 			and encodes them according to our protocol.
+ */
 void build_msg()
 {
     float temp = 0;
@@ -121,6 +146,9 @@ void build_msg()
 //**        setup sensors                                                           **
 //************************************************************************************
 
+/**
+ * @brief	Initialises the temperature-sensor.
+ */
 void setup_temperature()
 {
   // search DS18B20 sensorAdress
@@ -131,9 +159,8 @@ void setup_temperature()
       
     if (OneWire::crc8(temp_sensor_adress, 7) != temp_sensor_adress[7])
     {
-    	DebugPrintln(F("1-W err"));
-      //DebugPrintln(F("1-Wire bus connection error!"));
-      break;
+        DebugPrintln(F("1-W err"));
+        break;
     }
   }
   
@@ -141,7 +168,10 @@ void setup_temperature()
   temp_sensors.begin();
 }
 
-
+/**
+ * @brief	Initialises the turbidity-sensor.
+ * @details	The used sensor doesn't need any setup as it always sends a relative value as a voltage.
+ */
 void setup_turbidity()
 {
 }
@@ -151,19 +181,26 @@ void setup_turbidity()
 //**        read sensors                                                            **
 //************************************************************************************
 
+/**
+ * @brief	Reads the current temperature.
+ * @return	Temperature in Kelvin
+ */
 float read_temp(void)
 {
   // Requests sensor for measurement
   temp_sensors.request(temp_sensor_adress);
   
-  // Waiting (block the program) for measurement reesults
+  // Waiting (block the program) for measurement results
   while(!temp_sensors.available());
   
   // Reads the temperature from sensor
   return temp_sensors.readTemperature(temp_sensor_adress) + 273.15;  //°C to K
 }
 
-
+/**
+ * @brief	Reads the current (relative) turbidity.
+ * @return	Turbidity (relative) in Volts
+ */
 float read_turb()
 {
   int sensorValue = analogRead(A0);
@@ -179,6 +216,10 @@ void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
+/**
+ * @brief			Event-handler for LoRaWAN
+ * @param[in]	ev	Event to handle
+ */
 void onEvent (ev_t ev) {
     switch(ev) {
         case EV_SCAN_TIMEOUT:
@@ -241,6 +282,10 @@ void onEvent (ev_t ev) {
     }
 }
 
+/**
+ * @brief			Send a message.
+ * @param[in]	j	Ignored
+ */
 void do_send(osjob_t* j){
   uint8_t i;
   // Check if there is not a current TX/RX job running
@@ -261,12 +306,13 @@ void do_send(osjob_t* j){
 
     //LMIC_setTxData2(1, (char*) &cnter, sizeof(cnter), 0);
     LMIC_setTxData2(1, mydata, sizeof(mydata)-1, 0);
-    //DebugPrint("Packet queued\nLMIC.freg: ");
-    //DebugPrintln(LMIC.freq);
   }
   // Next TX is scheduled after TX_COMPLETE event.
 }
 
+/**
+ * @brief	Initialises LoRaWAN
+ */
 void setup_lorawan() {
 
     // LMIC init
@@ -317,7 +363,7 @@ void setup_lorawan() {
     LMIC_setLinkCheckMode(0);
     
     // Set data rate and transmit power (note: txpow seems to be ignored by the library)
-//    LMIC_setDrTxpow(DR_SF7,14);
+    // LMIC_setDrTxpow(DR_SF7,14);
     LMIC_setDrTxpow(DR_SF12,14);
 
     // Start job
@@ -330,6 +376,11 @@ void setup_lorawan() {
 //**        conversions                                                             **
 //************************************************************************************
 
+/**
+ * @brief	Convertion from float to byte-array
+ * @details	Converts to little endian <br>
+ * 			Compliant of the strict aliasing rule.
+ */
 void FtoLE(float f, uint8_t* le)
 {
   union u_tag 
