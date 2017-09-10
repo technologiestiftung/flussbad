@@ -25,7 +25,20 @@ class Airprotocol {
 		}
 
 		if ( !is_string($data) ) {
-			throw new Exception('Argument must be a base64 encoded string');
+			throw new InvalidArgumentException('Argument must be a base64 encoded string');
+		} else {
+
+			// decode and encode only strings that are less then 1024 (1k)
+			if ( 1024 >= strlen($data) ) {
+				// argument string is not a base64 string
+				if ( ( $data !== base64_encode( base64_decode($data, true)) ) ) {
+					throw new InvalidArgumentException('Argument must be a base64 encoded string');
+				}
+			} else {
+				// throw exception because string is generally to long or
+				// chunk a little piece and test the chunk if this is valid base64
+				throw new Exception('string is to long');
+			}
 		}
 
 		// init the sensor counter
@@ -69,7 +82,7 @@ class Airprotocol {
 				// get the sensor id
 				$sensor_id = Integer::uInt16(substr($this->raw,$offset,$sensorTypeLength), Order::LITTLE_ENDIAN());
 
-				// get infos about the sensor
+				// get info about the sensor
 				$sensor_type = $this->getSensorType($sensor_id);
 
 				$offset += $sensorTypeLength;
@@ -106,7 +119,7 @@ class Airprotocol {
 		$db = DB::getInstance();
 
 		// get the data type of the sensor
-		$sensor = $db->select('v_sensor_type', ['id','datalength','data_type'], [ 'id' => $sensor_id ] );
+		$sensor = $db->select('v_sensor_type', ['id (sensor_type_id)','datalength','data_type'], [ 'id' => $sensor_id ] );
 		if ( !is_null($sensor) && 0 < sizeof($sensor) ) {
 			return $sensor;
 		} else {

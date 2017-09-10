@@ -36,7 +36,7 @@ class TTNData {
 		$decode = json_decode($this->json);
 		dumpVar($decode, '$decode');
 
-		//If json_decode failed, the JSON is invalid.
+		//If json_decode failed, the JSON string is invalid.
 		if ( !is_object($decode) ) {
 			throw new Exception('Received content contained invalid JSON!');
 		}
@@ -51,6 +51,13 @@ class TTNData {
 		}
 
 		throw new Exception('Json Objecct is not a valid TTN json Object!');
+	}
+
+	/**
+	 *
+	 */
+	public function validate() {
+		echo 'valieate the ttn data';
 	}
 
 	public function getData() {
