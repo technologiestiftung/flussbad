@@ -29,39 +29,22 @@ function tablePrint($data) {
 }
 
 /**
- * TTN integration
+ * TTN integration receiver
  */
 class TTNIntegration {
 
+	private $data;         /**< received data */
+	private $db;           /**< database instance */
+	private $node_id;      /**< node id of the received data */
+	private $sensorsData;  /**< sensors data */
+	private $sensors;      /**< sensors of the node */
+
+	private $app_id;       /**< supported app_id */
+
+	private $node;
 
 	/**
-	 *
-	 */
-	private $data;
-
-	/**
-	 *
-	 */
-	private $db;
-
-	/**
-	 *
-	 */
-	private $node_id;
-
-	/**
-	 *
-	 */
-	private $sensorsData;
-
-	/**
-	 *
-	 */
-	private $sensors;
-
-
-	/**
-	 *
+	 * Constructor
 	 */
 	public function __construct($jsonString = null) {
 try {
@@ -86,6 +69,7 @@ try {
 
 } catch ( Exception $e ) {
 	echo $e;
+	throw $e;
 }
 	}
 
@@ -143,21 +127,13 @@ try {
 
 		$dev_id = -1;
 		$hws_id = -1;
-		$app_id = -1;
 		$node_id = -1;
-
-		// get the id of the application
-		$result = $this->db->get('application', ['id'], [ 'app_id' => $ttnData->app_id ] );
-		$app_id = $result['id'];
 
 		// device id ( name ) is not exist add to the database
 		$result = $this->db->get('device', [ 'dev_id' => $ttnData->dev_id ] );
 		if ( false === $result ) {
 			$result = $this->db->insert('device', [ 'dev_id' => $ttnData->dev_id ] );
-//			dumpVar($result->errorInfo(), '$result->errorInfo()');
-//			dumpVar($result->rowCount(), '$result->rowCount()');
 			$dev_id = $this->db->id();
-			echo "device {$ttnData->dev_id} not exist add here<br/>";
 		} else {
 			$dev_id = $result['id'];
 		}
@@ -165,10 +141,7 @@ try {
 		$result = $this->db->get('hardware', [ 'hardware_serial' => $ttnData->hardware_serial ] );
 		if ( false === $result ) {
 			$result = $this->db->insert('hardware', [ 'hardware_serial' => $ttnData->hardware_serial ] );
-//			dumpVar($result->errorInfo(), '$result->errorInfo()');
-//			dumpVar($result->rowCount(), '$result->rowCount()');
 			$hws_id = $this->db->id();
-			echo "hardware serial {$ttnData->hardware_serial} not exist add here<br/>";
 		} else {
 			$hws_id = $result['id'];
 		}
@@ -176,19 +149,17 @@ try {
 		// get the node
 		$result = $this->db->get('node', [
 			"AND" => [
-				"app_id" => $app_id,
+				"app_id" => $this->app_id,
 				"dev_id" => $dev_id,
 				"hw_id" => $hws_id
 			]
 		]);
 		if ( false === $result ) {
 			$result = $this->db->insert('node', [
-				"app_id" => $app_id,
+				"app_id" => $this->app_id,
 				"dev_id" => $dev_id,
 				"hw_id" => $hws_id
 			]);
-//			dumpVar($result->errorInfo(), '$result->errorInfo()');
-//			dumpVar($result->rowCount(), '$result->rowCount()');
 			$node_id = $this->db->id();
 		}
 
@@ -213,48 +184,15 @@ try {
 		if ( is_array($sensors) && 0 === sizeof($sensors) ) {
 			$NodeSensorsData = [];
 			foreach( $NodeSensors as $sensor ) {
-				$NodeSensorsData[] = [ 'node_id' => $node_id, 'sensor_type_id' => $sensor['id'] ];
+				$NodeSensorsData[] = [ 'node_id' => $node_id, 'sensor_type_id' => $sensor['sensor_type_id'] ];
 			}
 			dumpVar($NodeSensorsData, '$NodeSensorsData', '33ff66');
 			$result = $this->db->insert('sensor', $NodeSensorsData );
 			dumpVar($result->errorInfo(), 'sensor $result->errorInfo()');
 			dumpVar($result->rowCount(), 'sensor $result->rowCount()');
 		}
-//		else {
-			$sensors = $this->db->select('sensor', ['id', 'node_id', 'sensor_type_id'], [ 'node_id' => $node_id ] );
-			dumpVar($NodeSensors, '$NodeSensors', '33ff66');
-			dumpVar($sensors, '$sensors result', '33ff66');
-			$NodeSensorsData = [];
-			$len = sizeof( $NodeSensors );
-			$len2 = sizeof( $sensors );
-//			for( $i = 0;
-			dumpVar($len, '$len', '33ff66');
-			dumpVar($len2, '$len2', '33ff66');
-//		}
-/*		foreach( $sens as $sen ) {
-			dumpVar($sen, '$sen', '33ff66');
-			if ( false === $result ) {
-				foreach(
 
-				$result = $this->db->insert('sensor', ['node_id' => $node_id, 'sensor_type_id' => $sen['id'] ] );
-				dumpVar($result, '$sensor insert', '33ff66');
-
-//			teste oben ob sensoren auf node existieren wenn keine daten dann füge komplett hinzu
-
-			'node_id' , 'sonsor_type_id 2'
-			'node_id' , 'sonsor_type_id 5'
-			'node_id' , 'sonsor_type_id 8'
-
-			}
-
-			ansonsten wenn daten vorhanden gehen array durch und gucke of neuenr sensor hinzugekommen ist
-
-		}
-		$result = $this->db->get('sensor', ['sensor_type_id'], [ 'node_id' => $node_id ] );
-		dumpVar($result, '$result of node after', '33ff33');
-
-*/
-
+		$sensors = $this->db->select('sensor', ['id', 'node_id', 'sensor_type_id'], [ 'node_id' => $node_id ] );
 
 		// test
 		//$result = $this->db->select('sensor', '*', [ 'node_id' => $node_id ] );
@@ -341,9 +279,7 @@ try {
 
 			$gatewayMeta = [];
 
-			dumpVar($gateway, '$gateway');
-			$result = $this->db->get('gateway', [ 'gtw_id' => $gateway->gtw_id ] );
-			dumpVar($result, '$result');
+			$result = $this->db->get('gateway', '*', [ 'gtw_id' => $gateway->gtw_id ] );
 			if ( false === $result ) {
 				$result = $this->db->insert('gateway', [ 'gtw_id' => $gateway->gtw_id ] );
 				dumpVar($result->errorInfo(), '$result->errorInfo()');
@@ -392,7 +328,7 @@ try {
 		}
 
 		$t3edekfe = $this->db->select('rec_gtw', '*', [ 'metadata_id' => $meta_id ] );
-		tablePrint($t3edekfe);
+		tablePrint($t3edekfe, 'received gateway');
 		$t3edekfe = $this->db->select('rec_gtw', [ '[><]v_gtw_metadata' => [ 'gateway_id' => 'id' ] ], '*', [ 'metadata_id' => $meta_id ] );
 		tablePrint($t3edekfe);
 
@@ -402,7 +338,32 @@ try {
 	/**
 	 *
 	 */
-	private function handleSensorData() {}
+	private function handleSensorData($meta_id) {
+
+		$sensdat = $this->sensorsData->getSensors();
+
+		$measures = [];
+		foreach( $this->sensors as $sensor ) {
+			foreach( $sensdat as $sensorvalue ) {
+				if ( $sensor['sensor_type_id'] == $sensorvalue['sensor_type_id'] ) {
+					$measures[] = [
+							'sensor_id' => $sensor['id'],
+							'metadata_id' => $meta_id,
+							'value' => $sensorvalue['value']
+					];
+					break;
+				}
+			}
+		}
+
+		if ( !empty($measures) ) {
+			$result = $this->db->insert('measured_value', $measures );
+		}
+
+		$result = $this->db->select('measured_value', '*');
+		tablePrint($result);
+
+	}
 
 	/**
 	 *
@@ -410,6 +371,8 @@ try {
 	private function saveSensorNodeData() {
 
 		$ttnData = $this->data->getData();
+
+		$node_not_exist = false;
 
 		$dev_id = -1;
 		$hws_id = -1;
@@ -419,20 +382,23 @@ try {
 		$meta_id = -1;
 		$gtw_ids = [];
 
-		dumpVar(($this->data->getData())->app_id, '($this->data->getData())->app_id');
-		dumpVar(($ttnData)->app_id, '($jsonObject)->app_id');
-
 		// check if the application exist if not break up
-		$result = $this->db->has('application', [ 'app_id' => $ttnData->app_id ] );
-		dumpVar($result, '$result');
+		$result = $this->db->get('application', ['id'], [ 'app_id' => $ttnData->app_id ] );
 		if ( false === $result ) {
-			echo "application not exist!";
-			throw new Exception('application not exist');
+			throw new Exception('Application not supported');
 		}
 
-		// get the id of the application
-		$result = $this->db->get('application', ['id'], [ 'app_id' => $ttnData->app_id ] );
-		$app_id = $result['id'];
+		// set the app_id from db
+		$this->app_id = $result['id'];
+
+		// try to get the Note, if the Note not exist an exception is thrown
+		try {
+			$node = Node::get($ttnData->app_id, $ttnData->dev_id, $ttnData->hardware_serial);
+			$this->node_id = $node->getID();
+			$node_not_exist = false;
+		} catch (Exception $e) {
+			$node_not_exist = true;
+		}
 
 		// parse the payload
 		$sensorData = new Airprotocol($ttnData->payload_raw);
@@ -443,36 +409,18 @@ try {
 try {
 		$this->db->pdo->beginTransaction();
 
-		$node_id = $this->handleNode();
+		// add Node
+		if ( $node_not_exist ) {
+			$node_id = $this->handleNode();
+		}
 
-		$sensors = $this->handleNodeSensors($this->node_id);
+		$this->sensors = $this->handleNodeSensors($this->node_id);
 
 		$meta_id = $this->handleMetadata();
 
 		$gatewayMeta = $this->handleGateways($meta_id);
 
-
-
-//-------   H A N D L E M E A S U R E D V A L U E   --------vvvvvvvvvv---------------------
-
-		$sensdat = $this->sensorsData->getSensors();
-		dumpVar($sensdat, 'sensor data from airprotocol');
-		dumpVar($sensors, 'sensors from node');
-		dumpVar($meta_id, 'metadata from node');
-
-		$measures = [];
-/*		foreach($sensors as $sonsor) {
-			$measures[] = [
-				'sensor_id' => $sensor['id'],
-				'metadata_id' => $meta_id,
-				'value' => $,
-		}
-*/
-
-
-//-------   H A N D L E M E A S U R E D V A L U E   --------^^^^^^^^^^---------------------
-
-	//	for $this->data->getGatewayCount()
+		$this->handleSensorData($meta_id);
 
 		//test
 		$result = $this->db->select('v_node', '*');
