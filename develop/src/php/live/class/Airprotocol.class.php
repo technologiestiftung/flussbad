@@ -100,6 +100,9 @@ class Airprotocol {
 			}
 		} catch (Exception $e) {
 			echo 'faild to parse the airprotocol version 1: ' . $e;
+			if ( empty($data) ) {
+				throw $e;
+			}
 		}
 
 		if ( 0 < sizeof($data) ) {
