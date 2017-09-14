@@ -406,7 +406,7 @@ try {
 		$this->sensorsData = $sensorData;
 
 		// now add the data to the database
-try {
+
 		$this->db->pdo->beginTransaction();
 
 		// add Node
@@ -443,19 +443,9 @@ try {
 			]);
 		tablePrint($result);
 
-
-
-} catch (Exception $e) {
-	dumpVar($e, 'exception');
-}
 		$this->db->pdo->rollBack();
 		//$this->db->pdo->commit();
 
-		/*
-			$result = $this->db->insert('v_node', [ 'hardware_serial' => $ttnData->hardware_serial ] );
-			dumpVar($result->columnCount(), '$result->columnCount()');
-			dumpVar($result->errorInfo(), '$result->errorInfo()');
-		*/
 	}
 
 }
