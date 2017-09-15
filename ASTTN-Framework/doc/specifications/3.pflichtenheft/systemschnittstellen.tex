@@ -1,0 +1,29 @@
+\section{Systemschnittstellen}
+
+Das System verf\"ugt \"uber mehrere Komponenten, die \"uber verschiedene
+Schnittstellen miteinander kommunizieren.
+
+\subsection{Messstation zu TTN}
+Eine Messstation muss \"uber eine Weboberfl\"ache manuell in einer Applikation
+eines TTN-Konto registriert werden. Ist dies erfolgt, werden die Daten \"uber
+das LoRaWAN-Protokoll von der Messstation an TTN \"ubertragen.
+
+\subsection{TTN zu Server}
+TTN stellt die empfangenen Daten mithilfe sog. \glqq Integrations\grqq{} zur Verf\"ugung.
+Eine \glqq Integration\grqq{} muss der jeweiligen Applikation, in der die Messstation registriert
+wurde, hinzugef\"ugt werden.
+In diesem Fall handelt es sich um eine \glqq HTTP-Integration\grqq. In dieser wird eine URL zu
+einem Webserver hinterlegt, an den die von TTN empfangenen Daten im JSON-Format
+weitergeleitet werden.
+
+\subsection{Server zu \"Offentlichkeit}
+Die gemessenen Daten werden Dritten \"uber eine HTTP(S)-Schnittstelle im JSON-Format zur Verf\"ugung gestellt.
+Diese werden \"uber die Domain \url{http://www.berlinerdaten.de/} abrufbar sein.
+
+\subsection{HW/SW-Konfiguration}
+
+Im Quelltext der Software, die auf dem Arduino l\"auft, m\"ussen bestimmte, von TTN vorgegebene
+Werte eingetragen werden. Hierzu z\"ahlen die zwei Schl\"ussel (\glqq Network Session Key\grqq,
+\glqq Application Session Key\grqq), die zur Herstellung eines sicheren Kommunikationskanals
+zwischen Messstation und TTN n\"otig sind, und die sog. \glqq Device Address\grqq, mit der
+das jeweilige Endger\"at (hier Messstation) eindeutig identifiziert wird.

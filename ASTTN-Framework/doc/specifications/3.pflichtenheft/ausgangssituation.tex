@@ -1,0 +1,29 @@
+\section{Beschreibung der Ausgangssituation}
+
+\subsection{Kurzbeschreibung der Ausgangssituation}
+
+Ein Node kann \"uber einen Gateway mit The Things Network (TTN) kommunizieren, welches auf der LoRaWAN Technologie aufbaut.
+LoRaWAN ist ein funkbasiertes Netzwerkdesign, welches es ermöglicht energiesparend Daten zu versenden. TTN stellt eine Schnittstelle zum
+Internet bereit und vereinfacht dadurch die Weiterleitung der Messdaten an externe Dienste/Server. Die über LoRaWAN an TTN gesendeten Daten
+werden bis zum Abruf dieser, jedoch maximal sieben Tage unter Verwendung einer sog. \glqq Storage Integration\grqq, zwischengespeichert.
+Gateways werden durch Freiwillige betrieben und frei zur Verfügung gestellt.\newline
+Der Verein Flussbad Berlin setzt sich seit 2012 dafür ein, dass im Bereich des Kupfergrabens ein öffentliches Bad erichtet wird. Die notwendige Reinigung des Flusswassers soll durch einen ökologischen Filter geschehen. Ein Prototyp dieses Filters wird im Juli 2017 (KW28) am Kupfergraben installiert.
+Diese Filteranlage befindet sich auf einem Kahn, auf dem auch eine unserer Messstationen platziert werden wird.
+
+\subsection{Auftraggeber}
+
+Bereits seit 2014 beteiligt die TSB sich aktiv an der Förderung von \glqq Open Data\grqq{} in Berlin mit verschiedenen Unternehmen, Behörden und Instituten.
+Im Rahmen solcher Projekte organisierte sie bereits am 05.05.2017 das erste \glqq LoRaWAN-Treffen\grqq{} in Zusammenarbeit mit The Things Network Berlin. Dies schuf eine Plattform, wo sich viele Interessenten begegnen und eigene Gedanken miteinander austauschen konnten.\newline
+Am 23.05.2017 lädt die TSB zum zweiten Treffen ein, auf welchem sie weitere m\"ogliche Anwendungsfälle vorstellen wird, mit dem Wunsch den Anwesenden neue Denkanstöße zu geben und bei der Ideenfindung zu helfen.\newline
+Trotz der Behandlung sensibler Umweltdaten der Stadt Berlin sollte das Projekt von der TSB durch ihre eigenen Kontakte zu Behörden und anderen Einrichtungen starke Unterst\"utzung
+finden.\newline
+
+\subsection{Zielbeschreibung}
+
+Es sollen robuste und wartungsarme Messstationen zur Erfassung von Umweltdaten entstehen. Diese Messstationen werden am Kupfergraben und
+der Spree betrieben, um die Wasserqualität im Kontext des Testfilters des Vereins Flussbad Berlin zu messen. Die Veränderung der Wasserqualität
+durch diesen Prototypen soll mit den Sensoren unserer Messstationen gemessen werden. Hierfür ist es zusätzlich notwendig, ein Gehäuse zu entwerfen,
+welches den Umwelteinflüssen am Kupfergraben standhält.\newline
+Die Messstation wird die Messdaten über ein Gateway an TTN versenden. Ein Datenbankserver muss über eine der Schnittstellen von TTN die Daten
+abrufen sobald sie durch TTN bereit gestellt werden und in der eigenen Datenbank speichern. Die Serversoftware und die Datenbank müssen so
+umgesetzt werden, dass es für Dritte einfach möglich ist die Messdaten abzurufen. Messdaten sollen mehrfach pro Stunde (abh\"angig von Datenmenge und Bestimmungen der Bundesnetzagentur) von den Messstationen aus zum Server \"ubertragen werden.

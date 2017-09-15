@@ -1,0 +1,111 @@
+\section{Produktanforderungen}
+
+Allgemein müssen neben allen verwendeten Komponenten auch das von uns ausgelieferte
+Produkt, insbesondere erstellte Software und die erhobenen Messdaten, frei lizenziert
+sein, sodass Dritten eine Weiterverwendung dieser Daten möglich ist.\newline
+Mithilfe von Messstationen werden über Sensoren Daten zur Bestimmung von Wasserqualität
+gemessen. Die eingesetzten Messstationen müssen den Umwelteinflüssen am Messstandort
+standhalten. Ihre Gehäuse müssen demnach wasserdicht und witterungsbest\"andig sein. Zudem muss
+eine praktikable Methode zur Stromversorgung der Messstationen gegeben sein.\newline
+Die gemessenen Daten werden über LoRaWAN an TTN übertragen. Anschließend werden diese
+Daten über eine der verfügbaren Schnittstellen aus dem TTN an einen Datenbankserver
+weitergeleitet und dort gespeichert. Die Daten werden strukturiert abgelegt,
+sodass erkenntlich ist, um welchen Sensor es sich handelt und wie die Daten zu
+interpretieren sind. Weiterhin sollen die gespeicherten Daten Dritten über
+eine oder mehrere Schnittstellen zugänglich gemacht werden.
+
+\subsection{Gruppen von Anforderungen}
+
+Die Anforderungen sind wie folgt gruppiert:
+\begin{itemize}
+	\item M: Anforderungen an die Messstation zur Erfassung der Wasserqualitätsparameter
+	\item S: Anforderungen an den Server zur Speicherung der erfassten Daten
+\end{itemize}
+
+Weitergehend existieren folgende Untergruppen:
+\begin{itemize}
+	\item M.0xx: Hardware spezifische Anforderungen der Messstation
+	\item M.1xx: Software spezifische Anforderungen der Messstation
+	\item S.0xx: Hardware spezifische Anforderungen des Servers
+	\item S.1xx: Software spezifische Anforderungen des Servers
+\end{itemize}
+
+\subsection{Funktionale Anforderungen}\label{subsec:func_require}
+
+\begin{description}
+	\item[M.001]
+		Die Messstation besteht aus einem Arduino Uno mit Dragino LoRa Shield, den in
+		Anforderung M.002 beschriebenen Sensoren, und einem Gehäuse.
+
+	\item[M.002]
+		Es werden folgende Sensoren zum ermitteln von Daten verwendet: pH-Sensor,
+		Wassertemperatursensor, Trübheitssensor.
+
+	\item[M.003]
+		Das Gehäuse der Messstation muss wasserdicht sein.
+
+	\item[M.004]
+		Das Gehäuse muss mindestens der Schutzart IP65 entsprechen.
+
+	\item[M.005]
+		Die in Anforderung M.002 beschriebenen Sensoren müssen wasserdicht sein.
+
+	\item[M.006]
+		Die Messstation wird über einen Festnetzanschluss auf dem Kahn des VFB mit Strom versorgt.
+\end{description}
+
+\begin{description}
+	\item[M.101]
+		Es werden mithilfe der in Anforderung M.002 beschriebenen Sensoren Daten gemessen.
+
+	\item[M.102]
+		Die erfassten Messdaten werden über das LoRaWAN Protokoll von der Messstation
+		an TTN übertragen.
+
+	\item[M.103]
+		Die Daten werden mithilfe einer HTTP-Integration von TTN an unseren Server
+		weitergeleitet.
+
+	\item[M.104]
+		Die erfassten Messdaten werden in einem festgelegten Zeitintervall an TTN
+		gesendet.
+
+	\item[M.105]
+		Die Messdaten werden vor dem Übertragen an TTN so strukturiert, dass zu einem
+		späteren Zeitpunkt erkenntlich ist, welche Parameter gemessen wurden und wie
+		diese zu interpretieren sind.
+
+	\item[M.106]
+		Die Messstation muss in einer sog. \glqq Applikation\grqq{} in einem TTN Konto
+		registriert und als sog. \glqq Collaborator\grqq{} zum TTN-Konto der TSB
+		hinzufgefügt werden.
+
+	\item[M.107]
+		Alle genutzten und von uns erstellten Software-Komponenten sind frei lizensiert.
+\end{description}
+
+\begin{description}
+	\item[S.001]
+		Der Server bietet mindestens PHP-Funktionalität und eine relationale Datenbank.
+
+	\item[S.002]
+		Bei dem Server handelt es sich um ein Webhosting-Paket, um den
+		Administrationsaufwand zu minimieren.
+\end{description}
+
+\begin{description}
+	\item[S.101]
+		Der Server verarbeitet mithilfe eines PHP-Skriptes die von TTN empfangenen
+		Daten und schreibt diese in eine MySQL Datenbank.
+
+	\item[S.102]
+		Die Daten werden strukturiert in die Datenbank abgelegt. Die Struktur ist im
+		ER-Modell beschrieben.
+
+	\item[S.103]
+		Der Server stellt die erfassten Daten über eine öffentliche HTTP(S)-Schnittstelle
+		im JSON-Format Dritten zur Verfügung.
+
+	\item[S.104]
+		Alle genutzten und von uns erstellten Software-Komponenten sind frei lizensiert.
+\end{description}

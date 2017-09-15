@@ -1,0 +1,158 @@
+\documentclass[
+11pt,
+a4paper,
+ngerman,
+]{article}
+
+\usepackage{babel}	%übersetzt die englischen überschriften ins deutche
+					% damit sind \tableofcontents und co gemeint
+
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx,color}	% to import graphics
+\usepackage[hidelinks]{hyperref}
+\usepackage{array}
+\usepackage{lastpage}
+\usepackage{lipsum}
+\usepackage{currfile}
+
+\usepackage{tabularx}
+\usepackage{longtable}		% must be load to get all features of this package in tabu
+\usepackage{tabu}			% more powerfull tables
+
+\usepackage{fancyhdr}
+\usepackage{colortbl}
+\usepackage{enumitem}
+\usepackage{ulem}
+
+
+\usepackage[textwidth=3.5cm,prependcaption]{todonotes}
+
+\usepackage{float}			% für den text fluss um figures und tables
+
+\usepackage[
+   hmargin=2cm,
+   right=4.3cm,  %remove if no more todos active
+   top=4cm,
+   bottom=4.5cm,
+   headheight=65pt,
+   footskip=50pt,
+   marginparwidth=70pt
+]{geometry}
+
+
+\setlength{\parindent}{0.95cm}
+
+% set a sans serif typo
+%\renewcommand{\familydefault}{\sfdefault}
+
+%comments talk
+\newcommand{\commentKayo}[1]{\todo[size=\small,color=green!40,author=Kayo]{#1}}
+\newcommand{\commentHeiko}[1]{\todo[size=\small,color=blue!30,author=Heiko]{#1}}
+\newcommand{\commentMark}[1]{\todo[size=\small,color=red!90!green!30,author=Mark]{#1}}
+\newcommand{\commentPhil}[1]{\todo[size=\small,color=red!35!blue!40,author=Phillip]{#1}}
+
+%
+\newcommand{\rem}[1]{\textcolor{red}{\sout{#1}}}
+\newcommand{\add}[1]{\textcolor{blue}{\uline{#1}}}
+
+\newcommand{\descriptionWhat}[1]{%
+	\begin{itshape}%
+	#1 \\%
+	\end{itshape}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% set doc header
+%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[CE,CO,LE,LO,RE,RO]{} %% clear out all headers
+\fancyhead[C]{%
+	\begin{tabularx}{\columnwidth}{|X|X|r|}
+		\hline
+		Technologiestiftung Berlin & \centering ID 4 & \centering Klare Sicht im Kupfergraben
+		\tabularnewline
+		\hline
+		\multicolumn{2}{|c|}{} & 30.06.2017 \\
+		\hline
+		\multicolumn{2}{|l|}{ Pflichtenheft-ID4.pdf } & \thepage\ of \pageref*{LastPage} \\
+		\hline
+	\end{tabularx}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% set doc footer
+%%%%%%%%%%%%%%%%%%%%%%%
+\fancyfoot[CE,CO,LE,LO,RE,RO]{} %% clear out all footers
+\fancyfoot[L]{%
+	\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+	Das Werk einschließlich aller seiner Teile ist urheberrechtlich geschützt. Jede Verwertung außerhalb der engen Grenzen des Urheberrechtsgesetzes ist ohne Zustimmung des Verfassers unzulässig und strafbar.
+}
+
+%set global table cell style
+\setlength{\tabcolsep}{8pt} % Default value: 6pt
+\renewcommand{\arraystretch}{1.3} % Default value: 1
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Document
+%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% set title page
+\begin{titlepage}
+{ %
+	\begingroup
+	\hbox{ % Horizontal box
+		\parbox[b]{1.1\textwidth}{ % Paragraph box which restricts text to less than the width of the page
+			{\noindent\Huge\bfseries Pflichtenheft \\[0.2\baselineskip] } % Title
+			{\large Projekt-ID 4 }\\[3\baselineskip] % Tagline or further description
+			{\noindent\Huge\bfseries Klare Sicht im Kupfergraben \\[.5\baselineskip] }
+			{\Large {Bestimmung der Wasserqualität mit Hilfe von Messstationen auf LoRaWAN-Basis}}
+		}%
+	}%
+	\endgroup%
+}%
+\end{titlepage}
+
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\newpage
+
+%% add this if you want the fancy style also on the first page of a chapter:
+%\thispagestyle{fancy}
+
+\input{einleitung.tex}
+
+\input{ausgangssituation.tex}
+
+\newpage
+
+\input{anforderungen.tex}
+
+\newpage
+
+\input{konzeption.tex}
+
+\newpage
+
+\input{rahmenbedingungen.tex}
+
+\input{systemschnittstellen.tex}
+
+\newpage
+
+\input{prozessschnittstellen.tex}
+
+\newpage
+
+\input{risiken.tex}
+
+\newpage
+
+\input{einverstaendnis.tex}
+
+\end{document}

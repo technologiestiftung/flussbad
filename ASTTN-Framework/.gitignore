@@ -1,0 +1,13 @@
+**/.DS_Store
+node_modules
+
+# latex build and temp files
+*.aux
+*.lof
+*.log
+*.lot
+*.toc
+*.out
+*.synctex.gz
+
+
